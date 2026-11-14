@@ -20,6 +20,7 @@ import hebrew_names as hn  # noqa: E402
 import observed_calendar as oc  # noqa: E402
 import pretemple_calendar as ptc  # noqa: E402
 import pages  # noqa: E402
+import locator  # noqa: E402
 import places  # noqa: E402
 import theme  # noqa: E402
 
@@ -46,6 +47,45 @@ def pretemple_view(rule, eq, nd, omer):
     return cv.PreTempleView(rule, eq, nd, omer)
 
 
+# ---------------------------------------------------------------- where the user is
+def _browser_tz():
+    try:
+        return st.context.timezone
+    except Exception:
+        return None
+
+
+if "place" not in st.session_state:
+    guess = locator.place_from_timezone(_browser_tz())
+    if guess is None:
+        guess = dict(places.PRESETS[0], label="Jerusalem, Israel", src="default")
+    st.session_state["place"] = guess
+    st.session_state["place_src"] = guess["src"]
+
+
+def _on_pick():
+    v = st.session_state.get("locator")
+    p = v.get("pick") if hasattr(v, "get") else getattr(v, "pick", None)
+    if not isinstance(p, dict) or "lat" not in p:
+        return
+    try:
+        lat, lon = float(p["lat"]), float(p["lon"])
+    except (TypeError, ValueError):
+        return
+    if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+        return
+    if p.get("auto") and st.session_state.get("place_src") == "manual":
+        return   # the user already chose a place by hand: keep it
+    acc = p.get("acc") if isinstance(p.get("acc"), (int, float)) else None
+    st.session_state["place"] = locator.place_from_device(lat, lon, acc, _browser_tz())
+    st.session_state["place_src"] = "gps"
+
+
+def _set_manual(pl: dict):
+    st.session_state["place"] = dict(pl, src="manual")
+    st.session_state["place_src"] = "manual"
+
+
 # ---------------------------------------------------------------- top switches
 c1, c2 = st.columns([1.6, 2.0]) if not device.phone() else (st.container(), st.container())
 with c1:
@@ -60,6 +100,12 @@ with c2:
     page = st.radio("Page", list(PAGES), key="page", horizontal=True, format_func=lambda k: PAGES[k][0],
                     label_visibility="collapsed" if not device.phone() else "visible")
 
+_pl = st.session_state["place"]
+_how = {"gps": "from your device", "timezone": "first guess from your time zone",
+        "manual": "chosen by you", "default": "starting place"}.get(st.session_state.get("place_src"), "")
+locator.show(f"📍 {_pl.get('label', _pl['name'])}" + (f" · {_pl['he']}" if _pl.get("he") else "") + f"  ({_how})",
+             auto=st.session_state.get("place_src") in ("default", "timezone"), on_pick=_on_pick)
+
 # ---------------------------------------------------------------- settings
 device.switch()
 panel = device.input_panel("Settings: place, holidays, sighting rules · הגדרות")
@@ -67,8 +113,6 @@ with panel:
     st.subheader("Your place · מקום")
     preset_names = [p["name"] for p in places.PRESETS]
     q = st.text_input("Search for a town or city", key="place_q", placeholder="e.g. Boulder, Haifa, Paris")
-    if "place" not in st.session_state:
-        st.session_state["place"] = dict(places.PRESETS[0])
     if q.strip():
         res = places.search(q)
         if res:
@@ -76,9 +120,8 @@ with panel:
                                 format_func=lambda i: places.label(res[i]) + (f" · {res[i]['he']}" if res[i].get("he") else ""))
             if st.button("Use this place", key="place_use", width="stretch"):
                 r = res[pick]
-                st.session_state["place"] = {"name": r["name"], "he": r.get("he", ""), "country": r["country"],
-                                             "lat": r["lat"], "lon": r["lon"], "tz": r["tz"],
-                                             "label": places.label(r)}
+                _set_manual({"name": r["name"], "he": r.get("he", ""), "country": r["country"],
+                             "lat": r["lat"], "lon": r["lon"], "tz": r["tz"], "label": places.label(r)})
                 st.rerun()
         else:
             st.caption("No town of 15,000+ people by that name. Try a nearby city, or enter coordinates below.")
@@ -87,15 +130,15 @@ with panel:
         st.session_state["_last_preset"] = pre
         p = dict(next(x for x in places.PRESETS if x["name"] == pre))
         p["label"] = places.label(p) if p.get("country_name") else f"{p['name']}"
-        st.session_state["place"] = p
+        _set_manual(p)
         st.rerun()
     place = st.session_state["place"]
     place.setdefault("label", place["name"])
     with st.expander("Exact coordinates"):
         lat = st.number_input("Latitude (° north, negative = south)", -66.0, 66.0, float(place["lat"]), 0.0001,
-                              format="%.4f", key=f"lat_{place['name']}")
+                              format="%.4f", key=f"lat_{place['name']}_{place['lat']:.4f}")
         lon = st.number_input("Longitude (° east, negative = west)", -180.0, 180.0, float(place["lon"]), 0.0001,
-                              format="%.4f", key=f"lon_{place['name']}")
+                              format="%.4f", key=f"lon_{place['name']}_{place['lon']:.4f}")
         place = dict(place, lat=lat, lon=lon)
         st.caption(f"Time zone: {place['tz']}")
     st.caption(f"Using: {place['label']}" + (f" · {place['he']}" if place.get("he") else ""))

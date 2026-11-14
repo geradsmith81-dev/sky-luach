@@ -21,6 +21,7 @@ import sky_engine as se
 import sky_layer as sl
 import theme
 import hebrew_names as hn
+import holiday_history as hh
 from hebrew_names import bi, bt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -186,7 +187,7 @@ def render_today(ctx):
         other = other_view(view, ctx)
         rows = []
         for h in hol[:12]:
-            rows.append(f"<tr><td>{h.date:%a %d %b}</td><td>{theme.chip(h.kind, h.name, h.hebrew)}</td>"
+            rows.append(f"<tr><td>{h.date:%a %d %b}</td><td>{hh.clickable(h.name, theme.chip(h.kind, h.name, h.hebrew))}</td>"
                         f"<td class='sl-muted'>{esc(h.hdate) if h.hdate else ''}<br>"
                         f"<span class='sl-he-i'>{esc(h.hdate.hebrew()) if h.hdate else ''}</span></td></tr>")
         st.html(card(f"Coming up · בקרוב — {view.kind}", "<table class='sl-table'>" + "".join(rows) + "</table>"))
@@ -248,14 +249,15 @@ def render_month(ctx):
 
     def cell_lines(d):
         out = []
-        hh = view.hdate(d)
+        hd_view = view.hdate(d)
         for other in other_list:
             oh = other.hdate(d)
             if oh is not None:
-                differ = (oh.day, oh.month) != (hh.day, hh.month)
+                differ = (oh.day, oh.month) != (hd_view.day, hd_view.month)
                 out.append(f"<span class='sl-other'>{'≠ ' if differ else ''}{other.short}: {oh.day} {esc(oh.month_name)}</span>")
         for h in hol.get(d, []):
-            out.append(theme.chip(h.kind, h.name, h.hebrew))
+            out.append(hh.clickable(h.name, theme.chip(h.kind, h.name, h.hebrew),
+                                    align_right=(d.weekday() in (3, 4, 5) and not device.phone())))
         if d.weekday() == 4 and z.get(d):
             out.append(f"<span class='sl-line'>Candles <b>{t12(z[d]['candle_lighting'])}</b></span>")
         if d.weekday() == 5:
@@ -299,7 +301,8 @@ def render_month(ctx):
         rows = "".join("<tr>" + "".join(cells[i:i + 7]) + "</tr>" for i in range(0, len(cells), 7))
         st.html("<table class='sl-grid'><tr>" + "".join(f"<th>{w} <span class='sl-he-i'>{he}</span></th>" for w, he in WEEK)
                 + "</tr>" + rows + "</table>")
-    st.html(theme.legend())
+    st.html(theme.legend() + "<div class='sl-muted' style='margin-top:.3rem'>Click a holiday's name for a short history "
+            "of the day.</div>")
 
     # how the month began
     if view.kind == cv.FIXED:
@@ -392,7 +395,7 @@ def render_year(ctx):
         if h.kind == "fast" and h.name != "Tisha B'Av":
             zz = z.get(h.date, {})
             starts = f"dawn {t12(zz.get('dawn'))}" if zz else ""
-        rows.append(f"<tr><td>{h.date:%a %d %b %Y}</td><td>{theme.chip(h.kind, h.name, h.hebrew)}"
+        rows.append(f"<tr><td>{h.date:%a %d %b %Y}</td><td>{hh.clickable(h.name, theme.chip(h.kind, h.name, h.hebrew))}"
                     f"{'<br><span class=sl-muted>' + esc(h.note) + '</span>' if h.note else ''}</td>"
                     f"<td>{esc(h.hdate) if h.hdate else ''}<br><span class='sl-he-i'>{esc(h.hdate.hebrew()) if h.hdate else ''}</span></td>"
                     f"<td>{esc(starts)}</td></tr>")
@@ -415,7 +418,8 @@ def render_year(ctx):
                        file_name=f"sky_luach_{view.short.lower()}_{y}.ics", mime="text/calendar", width="stretch")
     c2.download_button("Download as a spreadsheet (.csv)", df.to_csv(index=False).encode("utf-8-sig"),
                        file_name=f"sky_luach_{view.short.lower()}_{y}.csv", mime="text/csv", width="stretch")
-    st.caption("Times in 'Begins' are sunset on the evening before at your place (fasts other than Tisha B'Av begin at dawn).")
+    st.caption("Click a holiday's name for a short history. Times in 'Begins' are sunset on the evening before at your "
+               "place (fasts other than Tisha B'Av begin at dawn).")
 
 
 # ----------------------------------------------------------------------------------------------
@@ -474,7 +478,7 @@ def render_compare(ctx):
         he = {"Rosh Hashanah": "ראש השנה", "Yom Kippur": "יום כיפור", "Sukkot I": "סוכות", "Chanukah (day 1)": "חנוכה",
               "Asara B'Tevet": "עשרה בטבת", "Tu BiShvat": "ט״ו בשבט", "Purim": "פורים", "Pesach I": "פסח",
               "Shavuot": "שבועות", "17 Tammuz": "שבעה עשר בתמוז", "Tisha B'Av (date)": "תשעה באב"}.get(name, "")
-        rows.append(f"<tr><td>{bi(name, he)}</td><td>{dfmt(f)}</td>" +
+        rows.append(f"<tr><td>{hh.clickable(name, theme.chip('major', name, he))}</td><td>{dfmt(f)}</td>" +
                     "".join(dcell(hol_date(c, name, m, d), f) for _, c in cals) + "</tr>")
     st.html("<h4 style='margin:0'>Holidays · מועדים</h4><table class='sl-table'>" + head + "".join(rows) + "</table>")
 
@@ -609,6 +613,12 @@ def render_about(ctx):
     path = os.path.join(HERE, "HOW_IT_WORKS.md")
     with open(path, encoding="utf-8") as f:
         st.markdown(f.read())
+    st.markdown("### Holiday guide · מדריך המועדים")
+    st.caption("The same short histories open when you click a holiday's name anywhere in the app.")
+    for key, (title, he, text, src) in hh.H.items():
+        with st.expander(f"{title} · {he}"):
+            st.markdown(text)
+            st.caption(f"Sources: {src}")
     try:
         lo, hi = se.ephemeris_range()
         _, _, name = se.load()

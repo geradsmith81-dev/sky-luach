@@ -60,6 +60,11 @@ All positions come from NASA JPL's planetary ephemeris **DE440s**, the same file
 - **Great cycle** (מחזור גדול): 28 years. Birkat HaChamah (ברכת החמה) is said when Shmuel's tekufah of Nisan returns to the start of a Wednesday; the next is on 8 April 2037.
 - **Sabbatical cycle** (שמיטה): 7 years, by the modern reckoning (5782 and 5789 are shmita years).
 
+### 4b. Your location and the holiday guide · מקום ומדריך המועדים
+
+- **Location.** When the app opens it first guesses your place from your device's time zone. It then asks the device once for its position (GPS on a phone, Wi-Fi position on a computer); the browser shows its own permission prompt. Sunset and Shabbat times use your exact coordinates, named after the nearest town (with its Hebrew name when one is known). A place you choose yourself in Settings is never replaced. Press 📍 **Use my location** to ask again. Your position stays in this browser session and is not stored or sent anywhere else.
+- **Holiday histories.** Click any holiday's name (in the month grid, the year list, "Coming up" or Compare) for a short history with its biblical, rabbinic and, where relevant, archaeological background. All the histories are also collected in the Holiday guide below.
+
 ### 5. The look of the app · עיצוב
 
 The design draws on the art of the First Temple period (Iron Age II, about 1000–586 BCE) in Israel and Judah:

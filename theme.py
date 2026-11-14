@@ -123,6 +123,19 @@ h1, h2, h3, h4 {{ font-family: {SERIF}; color: {GOLD}; }}
 .sl-cycle.leap {{ background: {GOLD}; color: {INK}; }}
 .sl-cycle.common {{ background: {CARD}; color: {TEXT}; border: 1px solid {BRONZE}; }}
 .sl-cycle.now {{ outline: 3px solid {LINK}; outline-offset: 2px; }}
+.sl-pop {{ display: inline-block; position: relative; vertical-align: top; }}
+.sl-pop > summary {{ list-style: none; cursor: pointer; display: inline; }}
+.sl-pop > summary::-webkit-details-marker {{ display: none; }}
+.sl-pop > summary .sl-chip {{ text-decoration: underline dotted rgba(26,18,12,.6); text-underline-offset: 2px; }}
+.sl-pop[open] > summary .sl-chip {{ outline: 2px solid {GOLD}; }}
+.sl-popbody {{ position: absolute; z-index: 1000; left: 0; top: calc(100% + 4px); width: 340px; max-width: 80vw;
+              background: {CARD}; color: {TEXT}; border: 1px solid {GOLD}; border-radius: 6px; padding: .7rem .85rem;
+              box-shadow: 0 8px 24px rgba(0,0,0,.65); font-size: .86rem; line-height: 1.45; text-align: left;
+              white-space: normal; font-weight: 400; }}
+.sl-pop-r .sl-popbody {{ left: auto; right: 0; }}
+.sl-pop-title {{ font-family: {SERIF}; color: {GOLD}; font-weight: 700; font-size: 1rem; margin-bottom: .3rem; }}
+.sl-pop-text {{ color: {TEXT}; }}
+.sl-pop-src {{ color: {MUTED}; font-size: .78rem; margin-top: .45rem; font-style: italic; }}
 a {{ color: {LINK}; }}
 @media (pointer: coarse) {{
   .sl-grid td {{ height: auto; min-height: 80px; }}
@@ -130,6 +143,7 @@ a {{ color: {LINK}; }}
   button {{ min-height: 44px; }}
 }}
 @media (max-width: 640px) {{
+  .sl-popbody {{ position: static; width: auto; max-width: none; margin-top: 4px; }}
   .sl-title {{ font-size: 1.5rem; }} .sl-title .sl-he-i {{ font-size: 1.3rem; }}
   .sl-big {{ font-size: 1.28rem; }}
 }}
