@@ -1,4 +1,4 @@
-"""One interface for the two calendars, used by the pages."""
+"""One interface for all the calendars, used by the pages."""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -8,13 +8,25 @@ import fixed_calendar as fc
 import hebrew_names as hn
 import observed_calendar as oc
 import pretemple_calendar as ptc
+import karaite_calendar as kc
+import samaritan_calendar as sc
 from fixed_calendar import HDate, Holiday
 
 FIXED = "Fixed (rabbinic)"
 OBSERVED = "Observed (sighting)"
 PRETEMPLE = "Early Temple Period"
-ALL = [FIXED, OBSERVED, PRETEMPLE]
-KIND_HE = {FIXED: "הלוח הקבוע", OBSERVED: "קידוש החודש על פי הראייה", PRETEMPLE: "לוח תקופת המקדש הקדומה"}
+KARAITE = "Karaite"
+SAMARITAN = "Samaritan"
+ALL = [FIXED, OBSERVED, PRETEMPLE, KARAITE, SAMARITAN]
+KIND_HE = {FIXED: "הלוח הקבוע", OBSERVED: "קידוש החודש על פי הראייה", PRETEMPLE: "לוח תקופת המקדש הקדומה",
+           KARAITE: "לוח הקראים", SAMARITAN: "לוח השומרונים"}
+
+# festival-day schemes of the fixed calendar
+SCHEMES = {
+    "israel": "Israel: one festival day (Israeli Torah readings)",
+    "diaspora": "Diaspora: second festival days (Yom Tov Sheni)",
+    "oneday": "One day everywhere, one-day Rosh Hashanah (Reform; many Reconstructionist congregations)",
+}
 
 
 @dataclass
@@ -41,8 +53,14 @@ class FixedView:
     kind = FIXED
     short = "Fixed"
 
-    def __init__(self, israel: bool, modern: bool, omer: bool):
-        self.israel, self.modern, self.omer = israel, modern, omer
+    def __init__(self, israel: bool, modern: bool, omer: bool, scheme: str | None = None, sigd: bool = False):
+        self.scheme = scheme or ("israel" if israel else "diaspora")
+        self.israel = self.scheme != "diaspora"
+        self.modern, self.omer, self.sigd = modern, omer, sigd
+
+    def _kw(self) -> dict:
+        return dict(israel=self.israel, modern=self.modern, omer=self.omer, sigd=self.sigd,
+                    one_day_rh=self.scheme == "oneday")
 
     def covers(self, d: date) -> bool:
         return date(1850, 1, 1) <= d <= date(2149, 12, 31)
@@ -74,12 +92,10 @@ class FixedView:
         return fc.from_gregorian(d).year
 
     def holidays_for_year(self, year: int, rosh_chodesh=True, special=True) -> list[Holiday]:
-        return fc.holidays_for_year(year, israel=self.israel, modern=self.modern,
-                                    special_shabbatot=special, rosh_chodesh=rosh_chodesh, omer=self.omer)
+        return fc.holidays_for_year(year, special_shabbatot=special, rosh_chodesh=rosh_chodesh, **self._kw())
 
     def holidays_between(self, start: date, end: date, rosh_chodesh=True, special=True) -> list[Holiday]:
-        return fc.holidays_between(start, end, israel=self.israel, modern=self.modern,
-                                   special_shabbatot=special, rosh_chodesh=rosh_chodesh, omer=self.omer)
+        return fc.holidays_between(start, end, special_shabbatot=special, rosh_chodesh=rosh_chodesh, **self._kw())
 
     def parsha(self, d: date) -> tuple[str, str] | None:
         """(English, Hebrew) names of the weekly portion; None if not Shabbat; ('', '') on a festival."""
@@ -175,6 +191,92 @@ class PreTempleView(ObservedView):
                      f"{(ss.date() if ss else m.start - timedelta(days=1)):%a %d %b %Y}"
                      + (f" ({ss:%H:%M} UT)" if ss else ""))
         return info
+
+
+class KaraiteView(ObservedView):
+    kind = KARAITE
+    short = "Karaite"
+
+    def __init__(self, criterion: str, equinox: str, nisan_day: int, omer: bool):
+        self.cal = kc.KaraiteCalendar(criterion, equinox, nisan_day)
+        self.omer = omer
+        self.israel = True
+
+    def _info(self, m):
+        info = super()._info(m)
+        if m.month == fc.NISAN:
+            info.note += (". Karaites begin the year when the barley is aviv in the Land of Israel; this model uses "
+                          "the spring-equinox rule as a stand-in")
+        return info
+
+
+class SamaritanView:
+    kind = SAMARITAN
+    short = "Samaritan"
+    israel = True
+
+    def __init__(self, rule: str = "sunset", april8_floor: bool = False):
+        self.cal = sc.SamaritanCalendar(april8_floor, rule)
+        self.omer = False
+
+    def covers(self, d: date) -> bool:
+        return self.cal.covers(d)
+
+    @property
+    def first_day(self):
+        return self.cal.first_day
+
+    @property
+    def last_day(self):
+        return self.cal.last_day
+
+    def hdate(self, d: date):
+        return self.cal.from_gregorian(d)
+
+    def _info(self, m: sc.SamMonth) -> MonthInfo:
+        la = sc.apparent_local(m.conj_utc)
+        rule = "apparent noon" if self.cal.rule == "noon" else "sunset"
+        note = (f"True new moon (JPL DE440s) {m.conj_utc:%a %d %b %Y, %H:%M} UT = {la:%H:%M} sundial time at Mount "
+                f"Gerizim; the month's first day is the day containing it (day boundary: {rule})")
+        return MonthInfo(m.year, m.month, m.name, m.name_he, m.start, m.length, m.leap, note)
+
+    def month_at(self, d: date) -> MonthInfo | None:
+        m = self.cal.month_of(d)
+        return self._info(m) if m else None
+
+    def year_months(self, year: int) -> list[MonthInfo]:
+        return [self._info(m) for m in self.cal.cycle_months(year)]
+
+    def is_leap(self, year: int) -> bool:
+        return self.cal.cycle_leap(year)
+
+    def year_of(self, d: date) -> int | None:
+        return self.cal.cycle_of(d)
+
+    def holidays_for_year(self, year: int, rosh_chodesh=True, special=True) -> list[Holiday]:
+        H = self.cal.holidays_for_year(year)
+        if rosh_chodesh:
+            for m in self.cal.cycle_months(year):
+                if m.month != 1:
+                    H.append(Holiday(m.start, f"New moon day: {m.name}", f"ראש {m.name_he}", "rosh_chodesh",
+                                     sc.SamDate(m.year, m.month, 1)))
+            H.sort(key=lambda h: (h.date, fc._KIND_ORDER.get(h.kind, 9)))
+        return H
+
+    def holidays_between(self, start: date, end: date, rosh_chodesh=True, special=True) -> list[Holiday]:
+        out = []
+        for y in self.cal.years():
+            ms = self.cal.cycle_months(y)
+            if not ms or ms[0].start > end or ms[-1].end < start - timedelta(days=200):
+                continue
+            out.extend(h for h in self.holidays_for_year(y, rosh_chodesh) if start <= h.date <= end)
+        return sorted({(h.date, h.name): h for h in out}.values(), key=lambda h: (h.date, fc._KIND_ORDER.get(h.kind, 9)))
+
+    def parsha(self, d: date):
+        return None
+
+    def years(self) -> list[int]:
+        return self.cal.years()
 
 
 # ----------------------------------------------------------------------------------------------

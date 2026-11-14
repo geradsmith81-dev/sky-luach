@@ -311,16 +311,25 @@ def _h(year, month, day, name, he, kind, note="", evening=True) -> Holiday:
 
 def holidays_for_year(year: int, israel: bool = False, modern: bool = True,
                       special_shabbatot: bool = True, rosh_chodesh: bool = True,
-                      omer: bool = False) -> list[Holiday]:
-    """All holidays from 1 Tishrei to 29 Elul of Hebrew `year`."""
+                      omer: bool = False, sigd: bool = False, one_day_rh: bool = False) -> list[Holiday]:
+    """All holidays from 1 Tishrei to 29 Elul of Hebrew `year`.
+
+    sigd: add the Beta Israel festival of Sigd (29 Marcheshvan; Thursday 27 Marcheshvan when the 29th is
+          Shabbat, as observed in Israel).
+    one_day_rh: Rosh Hashanah of one day only (the Reform custom; use with israel=True for the
+          'one day everywhere' scheme).
+    """
     H: list[Holiday] = []
     add = H.append
     adar = ADAR_II if is_leap(year) else ADAR
 
     # --- Tishrei
     add(_h(year - 1, ELUL, 29, "Erev Rosh Hashanah", "ערב ראש השנה", "erev", evening=False))
-    add(_h(year, TISHREI, 1, "Rosh Hashanah I", "ראש השנה א׳", "major"))
-    add(_h(year, TISHREI, 2, "Rosh Hashanah II", "ראש השנה ב׳", "major"))
+    if one_day_rh:
+        add(_h(year, TISHREI, 1, "Rosh Hashanah", "ראש השנה", "major", "one day (Reform custom)"))
+    else:
+        add(_h(year, TISHREI, 1, "Rosh Hashanah I", "ראש השנה א׳", "major"))
+        add(_h(year, TISHREI, 2, "Rosh Hashanah II", "ראש השנה ב׳", "major"))
     g = 3 if to_gregorian(year, TISHREI, 3).weekday() != SHABBAT else 4
     add(_h(year, TISHREI, g, "Tzom Gedaliah", "צום גדליה", "fast",
            "postponed from Shabbat" if g == 4 else "", evening=False))
@@ -341,6 +350,13 @@ def holidays_for_year(year: int, israel: bool = False, modern: bool = True,
     else:
         add(_h(year, TISHREI, 22, "Shemini Atzeret", "שמיני עצרת", "major"))
         add(_h(year, TISHREI, 23, "Simchat Torah", "שמחת תורה", "major"))
+
+    # --- Marcheshvan: Sigd (Beta Israel), 50 days after Yom Kippur
+    if sigd:
+        sd = 29 if to_gregorian(year, MARHESHVAN, 29).weekday() != SHABBAT else 27
+        add(_h(year, MARHESHVAN, sd, "Sigd", "סיגד", "minor",
+               "Beta Israel festival, 50 days after Yom Kippur; an Israeli state holiday since 2008"
+               + ("; moved to Thursday (29 Marcheshvan is Shabbat)" if sd == 27 else ""), evening=False))
 
     # --- Kislev / Tevet: Chanukah, 25 Kislev for 8 days (candles from the evening before)
     for i in range(8):

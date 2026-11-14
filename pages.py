@@ -75,7 +75,25 @@ def seasons_info(gy: int) -> list:
 
 
 def others(view, ctx):
+    """Calendars shown in small print in each day cell of the month grid."""
+    if view.kind == cv.KARAITE:          # same months as the observed calendar
+        return [ctx["fixed"], ctx["samaritan"]]
+    if view.kind == cv.SAMARITAN:
+        return [ctx["fixed"], ctx["karaite"]]
     return [v for v in (ctx["fixed"], ctx["observed"], ctx["pretemple"]) if v.kind != view.kind]
+
+
+def year_label(view, y) -> str:
+    if view.kind == cv.SAMARITAN:
+        return f"{y} (from spring {y - 1638}; year {y + 1} begins at the Sixth Month)"
+    return f"{y} ({y - 3761}–{y - 3760})"
+
+
+def scheme_text(view) -> str:
+    if view.kind != cv.FIXED:
+        return " · one-day festivals"
+    return {"israel": " · Israel scheme", "diaspora": " · diaspora scheme (second festival days)",
+            "oneday": " · one day everywhere (Reform)"}.get(getattr(view, "scheme", ""), "")
 
 
 def other_view(view, ctx):
@@ -105,7 +123,8 @@ def render_today(ctx):
     zt = z.get(today, {})
     after_sunset = bool(zt.get("sunset")) and now >= zt["sunset"]
 
-    trio = [(v, v.hdate(today), v.hdate(today + timedelta(days=1))) for v in (fixed, obs, pre)]
+    shown = [fixed, obs, pre] + ([view] if view.kind in (cv.KARAITE, cv.SAMARITAN) else [])
+    trio = [(v, v.hdate(today), v.hdate(today + timedelta(days=1))) for v in shown]
     cols = st.columns(1 if device.phone() else 2)
     with cols[0]:
         wd = today.weekday()
@@ -318,6 +337,16 @@ def render_month(ctx):
                     f"<div class='sl-muted'>The molad is {abs(diff):.1f} hours {'after' if diff > 0 else 'before'} the true conjunction. "
                     "The fixed calendar uses the molad, never the observed Moon.</div>")
             st.html(card("How this month began · מולד החודש", body))
+    elif view.kind == cv.SAMARITAN:
+        mo = view.cal.month_of(m.start)
+        body = f"<div>{esc(m.note)}.</div>"
+        if mo is not None:
+            body += f"<div>In your time zone: <b>{mo.conj_utc.astimezone(tz):%A %d %b %Y, %H:%M}</b>.</div>"
+        body += ("<div class='sl-muted'>The Samaritan priests calculate the calendar; the full method is kept within the "
+                 "priestly family. This reconstruction reproduces the 14 published community dates checked (2001–2026). "
+                 "Months are named by number (the First Month is in spring), and the year number advances at the "
+                 "Sixth Month, the month of the entry into Canaan in Samaritan tradition.</div>")
+        st.html(card("How this month began · חשבון החדש", body))
     elif view.kind == cv.PRETEMPLE:
         body = f"<div>{esc(m.note)}.</div>"
         mo = view.cal.get_month(m.year, m.month)
@@ -371,8 +400,9 @@ def year_picker(view, ctx, key: str) -> int:
     years = view.years()
     cur = view.year_of(today) or years[len(years) // 2]
     cur = min(max(cur, years[0]), years[-1])
-    return st.selectbox("Hebrew year (AM)", years, index=years.index(cur), key=key,
-                        format_func=lambda y: f"{y} ({y - 3761}–{y - 3760})")
+    label = "Samaritan year (festival cycle from the First Month)" if view.kind == cv.SAMARITAN else "Hebrew year (AM)"
+    return st.selectbox(label, years, index=years.index(cur), key=f"{key}_{view.short}",
+                        format_func=lambda y: year_label(view, y))
 
 
 def render_year(ctx):
@@ -409,7 +439,7 @@ def render_year(ctx):
         t = fc.year_type(y)
         extra = f" · {t['days']} days ({t['kind']}) · Rosh Hashanah on {t['rosh_hashanah_weekday']}"
     st.html(f"<div class='sl-big'>{y} <span class='sl-he'>{esc(fc.hebrew_numeral(y % 1000))}</span> — {bi(view.kind, cv.KIND_HE[view.kind])}</div><div class='sl-muted'>{lm}{extra}"
-            f"{' · Israel scheme' if view.israel else ' · diaspora scheme (second festival days)'}</div>")
+            f"{scheme_text(view)}</div>")
     st.html("<table class='sl-table'><tr><th>Date</th><th>Holiday</th><th>Hebrew date</th><th>Begins</th></tr>"
             + "".join(rows) + "</table>")
     df = pd.DataFrame(recs)
@@ -604,6 +634,142 @@ def render_cycles(ctx):
                  "for rain (outside Israel) and for Birkat HaChamah, and it now runs about two weeks late. The tekufah of "
                  f"{bt('Rav Adda')} matches the fixed calendar's 19-year cycle and runs about a week late.</div>"))
     st.dataframe(pd.DataFrame(srows), hide_index=True, width="stretch")
+
+
+# ----------------------------------------------------------------------------------------------
+# Traditions
+# ----------------------------------------------------------------------------------------------
+def _go(cal_kind, scheme_key=None, scheme=None, sigd=None):
+    """Button callback: switch the calendar (and festival-day scheme) and open the Year page."""
+    def cb():
+        st.session_state["cal"] = cal_kind
+        if scheme_key and scheme:
+            st.session_state[scheme_key] = scheme
+        if sigd is not None:
+            st.session_state["sigd"] = sigd
+        st.session_state["page"] = "Year"
+    return cb
+
+
+@st.cache_data(max_entries=4, show_spinner=False)
+def _month_apart_counts(crit, eq, nd, rule, floor):
+    """Years 1850-2149 in which Pesach / the Feast of Unleavened Bread is a month from the fixed date."""
+    import karaite_calendar as kc
+    import samaritan_calendar as smc
+    k = kc.KaraiteCalendar(crit, eq, nd)
+    s_ = smc.SamaritanCalendar(floor, rule)
+    nk = ns = tk = ts = 0
+    for gy in range(1851, 2149):
+        f = fc.to_gregorian(gy + 3760, fc.NISAN, 15)
+        a = k.to_gregorian(gy + 3760, fc.NISAN, 15)
+        b = s_.to_gregorian(gy + 1638, 1, 15)
+        if a:
+            tk += 1
+            nk += abs((a - f).days) > 20
+        if b:
+            ts += 1
+            ns += abs((b - f).days) > 20
+    return nk, tk, ns, ts
+
+
+def render_traditions(ctx):
+    import traditions as trd
+    st.html("<div class='sl-muted'>Which branch keeps which calendar. Most branches of Judaism keep the same fixed "
+            "rabbinic calendar and differ only in how many days they keep each festival. The Karaites and the "
+            "Samaritans keep calendars of their own, and both are built into this app.</div>")
+    st.html(f"<div style='overflow-x:auto'><img src='{trd.diagram_uri()}' alt='Branches of Judaism and the calendar "
+            f"each keeps' style='width:100%;min-width:{'760px' if device.phone() else '0'};max-width:1200px;"
+            f"border-radius:12px'></div>")
+    if device.phone():
+        st.caption("Swipe sideways to see the whole diagram.")
+
+    rows = []
+    for name, he, desc, col, calk, note, subs in trd.BRANCHES:
+        cl, chl = trd.CAL[calk]
+        rows.append(f"<tr><td><b>{bi(name, he)}</b>{'<br><span class=sl-muted>' + esc(desc) + '</span>' if desc else ''}</td>"
+                    f"<td>{bi(cl, chl)}</td><td>{esc(note)}</td></tr>")
+        for sn, she, sd, scal, snote in subs:
+            scl, schl = trd.CAL[scal]
+            rows.append(f"<tr><td style='padding-left:1.4rem'>↳ {bi(sn, she)}"
+                        f"{'<br><span class=sl-muted>' + esc(sd) + '</span>' if sd else ''}</td>"
+                        f"<td>{bi(scl, schl)}</td><td>{esc(snote)}</td></tr>")
+    st.html(card("Branches and calendars · זרמים ולוחות",
+                 "<table class='sl-table'><tr><th>Branch</th><th>Calendar</th><th>Festival days</th></tr>"
+                 + "".join(rows) + "</table>"))
+
+    st.html("<h4 style='margin:.4rem 0 .2rem 0'>Open a tradition's calendar · פתח לוח</h4>")
+    sk = ctx["scheme_key"]
+    btns = [
+        ("Samaritan · שומרונים", _go(cv.SAMARITAN)),
+        ("Karaite · קראים", _go(cv.KARAITE)),
+        ("Orthodox / Conservative, outside Israel (two days)", _go(cv.FIXED, sk, "diaspora")),
+        ("Israel (one day)", _go(cv.FIXED, sk, "israel")),
+        ("Reform / Reconstructionist (one day everywhere)", _go(cv.FIXED, sk, "oneday")),
+        ("Beta Israel: fixed calendar with Sigd · סיגד", _go(cv.FIXED, sigd=True)),
+    ]
+    cols = st.columns(1 if device.phone() else 3)
+    for i, (lab, cb) in enumerate(btns):
+        cols[i % len(cols)].button(lab, key=f"trad_btn_{i}", on_click=cb, width="stretch")
+    st.caption("Each button switches the calendar (and the festival-day setting) and opens the Year page.")
+
+    # festivals side by side for one Gregorian year
+    tz = ZoneInfo(ctx["place"]["tz"])
+    this = datetime.now(tz).date().year
+    gy = st.selectbox("Compare the festivals of the year", list(range(1851, 2149)), index=this - 1851, key="trad_gy")
+    fixed, obs, kar, sam = ctx["fixed"], ctx["observed"], ctx["karaite"], ctx["samaritan"]
+    am = gy + 3760
+    sy = gy + 1638
+
+    def find(hols, prefix):
+        return next((h.date for h in hols if h.name.startswith(prefix)), None)
+
+    kh = kar.cal.holidays_for_year(am, rosh_chodesh=False) if am in set(kar.years()) else []
+    shol = sam.cal.holidays_for_year(sy) if sy in set(sam.years()) else []
+    o16 = obs.cal.to_gregorian(am, fc.NISAN, 16)
+    table = [
+        ("Pesach / Unleavened Bread (first day)", "פסח · חג המצות",
+         fc.to_gregorian(am, fc.NISAN, 15), obs.cal.to_gregorian(am, fc.NISAN, 15),
+         kar.cal.to_gregorian(am, fc.NISAN, 15), sam.cal.to_gregorian(sy, 1, 15)),
+        ("Shavuot", "שבועות", fc.to_gregorian(am, fc.SIVAN, 6), o16 + timedelta(days=49) if o16 else None,
+         find(kh, "Shavuot"), find(shol, "Shavuot")),
+        ("Yom Teruah / Rosh Hashanah (1st of the 7th month)", "ראש השנה · יום תרועה",
+         fc.to_gregorian(am + 1, fc.TISHREI, 1), obs.cal.to_gregorian(am + 1, fc.TISHREI, 1),
+         kar.cal.to_gregorian(am + 1, fc.TISHREI, 1), sam.cal.to_gregorian(sy + 1, 7, 1)),
+        ("Yom Kippur (10th of the 7th month)", "יום כיפור", fc.to_gregorian(am + 1, fc.TISHREI, 10),
+         obs.cal.to_gregorian(am + 1, fc.TISHREI, 10), kar.cal.to_gregorian(am + 1, fc.TISHREI, 10),
+         sam.cal.to_gregorian(sy + 1, 7, 10)),
+        ("Sukkot (first day)", "סוכות", fc.to_gregorian(am + 1, fc.TISHREI, 15),
+         obs.cal.to_gregorian(am + 1, fc.TISHREI, 15), kar.cal.to_gregorian(am + 1, fc.TISHREI, 15),
+         sam.cal.to_gregorian(sy + 1, 7, 15)),
+    ]
+
+    def cell(d, ref):
+        if d is None:
+            return "<td>—</td>"
+        n = (d - ref).days if ref else 0
+        txt = d.strftime("%a %d %b") + (f" <b>({n:+d})</b>" if n else "")
+        return f"<td class='sl-diff'>{txt}</td>" if n else f"<td>{txt}</td>"
+
+    head = ("<tr><th></th><th>" + bi("Fixed", cv.KIND_HE[cv.FIXED]) + "</th><th>" + bi("Observed", cv.KIND_HE[cv.OBSERVED])
+            + "</th><th>" + bi("Karaite", cv.KIND_HE[cv.KARAITE]) + "</th><th>" + bi("Samaritan", cv.KIND_HE[cv.SAMARITAN])
+            + "</th></tr>")
+    body = "".join(f"<tr><td>{hh.clickable(n, theme.chip('major', n, he))}</td><td>{f:%a %d %b %Y}</td>"
+                   + cell(o, f) + cell(k, f) + cell(s_, f) + "</tr>" for n, he, f, o, k, s_ in table)
+    st.html(card(f"Festivals of {gy} side by side · המועדים בלוחות", "<table class='sl-table'>" + head + body + "</table>"
+                 "<div class='sl-muted'>Days relative to the fixed calendar. Rosh Hashanah, Yom Kippur and Sukkot are "
+                 f"those of autumn {gy}.</div>"))
+    nk, tk, ns, ts = _month_apart_counts(ctx["crit"], ctx["eq"], ctx["nisan_day"], sam.cal.rule, sam.cal.april8_floor)
+    st.caption(f"1851–2148: the Karaite Feast of Unleavened Bread (with the equinox stand-in for the barley) is a month "
+               f"from the fixed Pesach in {nk} of {tk} years; the Samaritan one in {ns} of {ts} years.")
+    st.html(card("Notes and sources · מקורות", (
+        "<p>Samaritan calendar: calculated by the priests and published twice a year; reconstruction after "
+        "Reingold &amp; Dershowitz, <i>Calendrical Calculations</i> (4th ed. 2018), calibrated here to published "
+        "community dates (sunset day boundary at Mount Gerizim). Karaite calendar: crescent and barley (aviv) as "
+        "observed in the Land of Israel; the barley is modelled by the spring equinox. Festival-day customs: "
+        "Orthodox and most Conservative congregations outside Israel keep second days; Reform and most "
+        "Reconstructionist congregations keep one. Beta Israel: Sigd, 29 Marcheshvan, Israeli state holiday since "
+        "2008; in Ethiopia the community kept its own lunar reckoning, which is not modelled here. Messianic "
+        "Judaism is listed as in the source diagram; Jewish denominations regard it as a form of Christianity.</p>")))
 
 
 # ----------------------------------------------------------------------------------------------

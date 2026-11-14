@@ -1,6 +1,6 @@
 ## How Sky Luach works · איך זה עובד
 
-Sky Luach (לוח השמים) shows three Jewish calendars side by side. Use the switch at the top of every page to change between them.
+Sky Luach (לוח השמים) shows five calendars of the Jewish and Samaritan traditions side by side. Use the switch at the top of every page to change between them.
 
 ### 1. The fixed calendar · הלוח הקבוע
 
@@ -9,7 +9,7 @@ This is the calendar Jewish communities use today. Tradition credits it to Hille
 - **Molad (מולד).** Each month starts from a *mean* new moon. Successive molads are exactly 29 days, 12 hours and 793 parts apart (a part, *chelek*, is 1/1080 hour). The count starts from the molad of Creation, "BaHaRaD".
 - **The 19-year cycle (מחזור קטן).** Years 3, 6, 8, 11, 14, 17 and 19 of each cycle have a second Adar, which keeps Pesach (פסח) in spring.
 - **Postponements (דחיות).** Rosh Hashanah (ראש השנה) never falls on a Sunday, Wednesday or Friday (*lo ADU rosh*). It is also moved when the molad falls at noon or later (*molad zaken*), and in two rarer cases (*GaTaRaD*, *BeTUTaKPaT*).
-- **Holidays.** You can choose the Israel custom (ארץ ישראל) or the diaspora custom with second festival days. Fasts that would fall on Shabbat (שבת) are moved as tradition prescribes. The weekly Torah portion (פרשת השבוע) follows the standard rules for joining portions.
+- **Holidays.** You can choose the Israel custom (ארץ ישראל), the diaspora custom with second festival days (Orthodox and most Conservative congregations), or one day everywhere with a one-day Rosh Hashanah (Reform and many Reconstructionist congregations). Sigd (סיגד), the Beta Israel festival on 29 Marcheshvan, can be shown or hidden. Fasts that would fall on Shabbat (שבת) are moved as tradition prescribes. The weekly Torah portion (פרשת השבוע) follows the standard rules for joining portions.
 - **Accuracy.** The arithmetic follows Reingold & Dershowitz, *Calendrical Calculations*. For every day from 1850 to 2149 it matches two independent programs (pyluach and convertdate), with zero differences in dates, holidays, Torah portions and molads. See docs/VALIDATION.md.
 
 ### 2. The observed calendar · קידוש החודש על פי הראייה
@@ -45,6 +45,29 @@ This calendar asks what the Jewish calendar would look like if it followed the t
 - **Drift of the molad:** the molad's mean month is about 0.46 seconds longer than the true one. You can see it creeping: the mean molad−conjunction offset is +1.81 h in 1850–1949, +2.00 h in 1950–2049 and +2.19 h in 2050–2149.
 
 **A caution.** No archaeological or textual evidence shows that a conjunction-based calendar was used in ancient Israel or Judah. Biblical and rabbinic practice began the month with the first visible crescent; the Hebrew *chodesh* means "renewal". The name *Early Temple Period* is only a label for this astronomical ideal. It does not mean the calendar was used in the First Temple period, and it is not a reconstruction of documented practice. Its first month (Tishrei AM 1, autumn 3761 BCE) also lies outside DE440s. It would need the much larger DE441 file and an estimate of Earth's rotation 5,800 years ago, and that estimate is uncertain by more than enough to move a conjunction across sunset.
+
+### 2c. The Karaite calendar · לוח הקראים
+
+Karaite Jews (קראים) keep the calendar as they read it in the Bible, without the rabbinic fixed calendar.
+
+- **Months.** A month begins when the new crescent is seen from the Land of Israel, and no month is longer than 30 days. The app uses the same Jerusalem crescent predictions as the observed calendar, so the months are the same.
+- **The year.** The year begins with the month of the *aviv*, the ripening barley in the Land of Israel. Barley cannot be computed from an ephemeris, so the app uses the observed calendar's spring-equinox rule as a stand-in. In a real year the barley inspection can move the year by a month.
+- **Festivals.** Each festival is kept for one day. There is no Chanukah, Tu BiShvat or Lag BaOmer. Purim is kept on 14 and 15 of the last Adar.
+- **Shavuot.** The Omer is waved on the Sunday during the Feast of Unleavened Bread, because "the morrow after the sabbath" is read as the weekly Sabbath. Shavuot, 50 days later, is therefore always a Sunday.
+- **Fasts.** The fasts of the destruction follow the biblical dates: 9 Tammuz, 7 and 10 Av, 24 Tishrei and 10 Tevet. They are not moved for Shabbat in this model.
+
+### 2d. The Samaritan calendar · לוח השומרונים
+
+The Samaritans (שומרונים) are an Israelite community of Mount Gerizim and Holon. Their priests calculate the calendar, keep the full method within the priestly family, and publish it twice a year.
+
+- **Months.** Each month begins on the day of the true new moon, computed from NASA JPL DE440s. The app uses a sunset-to-sunset day at Mount Gerizim: the day that contains the conjunction is the first of the month. This reproduces all 14 published community dates checked (2001–2026). The published rule of Reingold & Dershowitz (a noon cut-off) can be chosen in Settings; it matches 9 of the 14.
+- **The year.** The First Month is the first month to begin after 11 March in the Julian calendar (24 March today). Months are named by number. The year number counts from the entry into Canaan and advances at the Sixth Month: year 3665 began in September 2026.
+- **Festivals.** The festivals are the Passover sacrifice on Mount Gerizim (14th of the First Month) and the Feast of Unleavened Bread (15th–21st). The others are Shavuot (always a Sunday), the Feast of the Seventh Month (the Samaritan New Year), the Day of Atonement, Tabernacles and the Eighth Day. Unleavened Bread, Shavuot and Tabernacles are pilgrimages up the mountain.
+- **Optional floor.** A rule that the sacrifice is never before 8 April is sometimes quoted. It is off by default because it contradicts a published date (19 Aug 2001).
+
+### 2e. Traditions · זרמים
+
+The Traditions page redraws a well-known diagram of the branches of Judaism and shows which calendar each branch keeps. Most branches keep the fixed calendar and differ only in festival days. The Karaites and Samaritans keep their own calendars, and the buttons on that page switch the app to them.
 
 ### 3. The astronomy · האסטרונומיה
 

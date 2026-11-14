@@ -1,4 +1,4 @@
-"""Sky Luach · לוח השמים — the Jewish calendar, fixed and observed, from NASA JPL astronomy.
+"""Sky Luach · לוח השמים — the Jewish calendars (fixed, observed, Early Temple, Karaite, Samaritan) from NASA JPL astronomy.
 
 Run:  streamlit run app.py
 """
@@ -19,6 +19,7 @@ import device  # noqa: E402
 import hebrew_names as hn  # noqa: E402
 import observed_calendar as oc  # noqa: E402
 import pretemple_calendar as ptc  # noqa: E402
+import samaritan_calendar as smc  # noqa: E402
 import pages  # noqa: E402
 import locator  # noqa: E402
 import places  # noqa: E402
@@ -33,6 +34,7 @@ PAGES = {
     "Year": ("Year & holidays · שנה ומועדים", pages.render_year),
     "Compare": ("Compare · השוואה", pages.render_compare),
     "Cycles": ("Cycles · מחזורים", pages.render_cycles),
+    "Traditions": ("Traditions · זרמים", pages.render_traditions),
     "About": ("How it works · הסבר", pages.render_about),
 }
 
@@ -45,6 +47,16 @@ def observed_view(crit, eq, nd, omer):
 @st.cache_resource(show_spinner="Building the Early Temple Period calendar from the true new moons…", max_entries=12)
 def pretemple_view(rule, eq, nd, omer):
     return cv.PreTempleView(rule, eq, nd, omer)
+
+
+@st.cache_resource(show_spinner="Building the Karaite calendar from the Jerusalem crescent table…", max_entries=12)
+def karaite_view(crit, eq, nd, omer):
+    return cv.KaraiteView(crit, eq, nd, omer)
+
+
+@st.cache_resource(show_spinner="Building the Samaritan calendar from the true new moons at Mount Gerizim…", max_entries=8)
+def samaritan_view(rule, floor):
+    return cv.SamaritanView(rule, floor)
 
 
 # ---------------------------------------------------------------- where the user is
@@ -95,7 +107,9 @@ with c1:
                         "Observed: months begin when the young crescent is (predicted) visible from Jerusalem, "
                         "and the leap month follows the spring equinox, as in the Second Temple period. "
                         "Early Temple Period: months begin at the true astronomical new moon (an astronomical "
-                        "ideal, counted from year 1).")
+                        "ideal, counted from year 1). Karaite: sighted crescent from the Land of Israel, the barley "
+                        "(aviv) year, biblical festivals only. Samaritan: the priests' calculated calendar, months from "
+                        "the true new moon at Mount Gerizim. See the Traditions page for who uses which.")
 with c2:
     page = st.radio("Page", list(PAGES), key="page", horizontal=True, format_func=lambda k: PAGES[k][0],
                     label_visibility="collapsed" if not device.phone() else "visible")
@@ -144,18 +158,23 @@ with panel:
     st.caption(f"Using: {place['label']}" + (f" · {place['he']}" if place.get("he") else ""))
 
     st.subheader("Holidays · מועדים")
-    israel = st.toggle("Israel custom (one festival day; Israeli Torah readings)", value=place.get("country") == "IL",
-                       key=f"israel_{place['name']}",
-                       help="Off: the diaspora custom with second festival days (Yom Tov Sheni).")
+    scheme = st.selectbox("Festival days (fixed calendar)", list(cv.SCHEMES), format_func=lambda k: cv.SCHEMES[k],
+                          index=0 if place.get("country") == "IL" else 1, key=f"scheme_{place['name']}",
+                          help="Israel: one day per festival. Diaspora: Orthodox and most Conservative congregations "
+                               "outside Israel add a second day (Yom Tov Sheni). One day everywhere: Reform and many "
+                               "Reconstructionist congregations, with a one-day Rosh Hashanah.")
+    israel = scheme != "diaspora"
     candle_default = 40 if place["name"] == "Jerusalem" else 18
     candle = st.number_input("Candle lighting: minutes before sunset", 0, 60, candle_default, 1,
                              key=f"candle_{place['name']}",
                              help="18 minutes is the common custom; Jerusalem custom is 40.")
     modern = st.toggle("Show Israeli national days", value=True, key="modern")
+    sigd = st.toggle("Show Sigd · סיגד (Beta Israel; Israeli state holiday)", value=True, key="sigd")
     omer = st.toggle("Show the Omer count · ספירת העומר", value=False, key="omer")
 
     st.subheader("Sighting rules · קידוש החודש")
-    st.caption("Used by the observed calendar (and by the Early Temple Period calendar's equinox rule).")
+    st.caption("Used by the observed and Karaite calendars (and by the Early Temple Period calendar's equinox rule). "
+               "For the Karaite calendar the spring marker stands in for the barley (aviv) inspection.")
     crit = st.selectbox("Crescent visibility from Jerusalem", list(oc.CRITERIA), key="crit",
                         format_func=lambda k: oc.CRITERIA[k])
     eq = st.selectbox("Spring marker for the leap month", list(oc.EQUINOX_SOURCES), key="eq",
@@ -170,16 +189,28 @@ with panel:
                            help="Months always begin at the true new moon. This only decides which years get a "
                                 "second Adar.")
 
+    st.subheader("Samaritan · לוח השומרונים")
+    sam_rule = st.selectbox("Which day begins the month", list(smc.RULES), key="sam_rule",
+                            format_func=lambda k: smc.RULES[k])
+    sam_floor = st.toggle("Passover sacrifice never before 8 April", value=False, key="sam_floor",
+                          help="A rule sometimes quoted for the community. Off by default: it contradicts the published "
+                               "start of the Sixth Month on 19 Aug 2001.")
+
 ctx = {
     "place": place, "candle": int(candle), "crit": crit, "eq": eq, "nisan_day": int(nisan_day), "pt_rule": pt_rule,
-    "fixed": cv.FixedView(israel, modern, omer),
+    "scheme": scheme, "scheme_key": f"scheme_{place['name']}",
+    "fixed": cv.FixedView(israel, modern, omer, scheme=scheme, sigd=sigd),
     "observed": observed_view(crit, eq, int(nisan_day), omer),
     "pretemple": pretemple_view(pt_rule, eq, int(nisan_day), omer),
+    "karaite": karaite_view(crit, eq, int(nisan_day), omer),
+    "samaritan": samaritan_view(sam_rule, bool(sam_floor)),
 }
-ctx["view"] = {cv.FIXED: ctx["fixed"], cv.OBSERVED: ctx["observed"], cv.PRETEMPLE: ctx["pretemple"]}[cal]
+ctx["view"] = {cv.FIXED: ctx["fixed"], cv.OBSERVED: ctx["observed"], cv.PRETEMPLE: ctx["pretemple"],
+               cv.KARAITE: ctx["karaite"], cv.SAMARITAN: ctx["samaritan"]}[cal]
 
 PAGES[page][1](ctx)
 
 st.html("<div class='sl-frieze' role='presentation' style='margin-top:1.2rem'></div>"
         "<div class='sl-muted' style='font-size:.8rem'>Astronomy: NASA JPL DE440s via Skyfield. "
-        "The observed calendar is a modelled reconstruction, not a ruling for practice.</div>")
+        "The observed, Karaite and Samaritan calendars are modelled reconstructions, not rulings for practice; "
+        "follow your community's published calendar.</div>")

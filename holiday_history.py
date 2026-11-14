@@ -219,9 +219,54 @@ H = {
         "On the Shabbat after Tisha B'Av, Isaiah 40 is read: 'Comfort, comfort my people'. It is the first of "
         "seven prophetic readings of consolation leading to Rosh Hashanah.",
         "Isa 40:1–26"),
+    "sigd": ("Sigd", "סיגד",
+        "The festival of the Beta Israel, the Jews of Ethiopia, kept 50 days after Yom Kippur. Its name comes from "
+        "a Ge'ez and Aramaic root meaning 'to bow down'. In Ethiopia the community fasted, climbed a mountain "
+        "led by its priests (qessotch), heard readings from the Orit (the Ge'ez Bible) recalling the renewal of "
+        "the covenant under Ezra and Nehemiah, prayed toward Jerusalem, and then broke the fast with a feast. "
+        "Before the mid-19th century it seems to have been kept on 29 Kislev. Since the 1980s it has been "
+        "celebrated on the promenade at Armon HaNatziv overlooking Jerusalem, and in 2008 the Knesset made it a "
+        "state holiday.",
+        "Neh 8–9; J. Abbink, Anthropos 78 (1983); K. K. Shelemay, Music, Ritual and Falasha History (1986); "
+        "Sigd Day Law 2008"),
+    "hanafat_haomer": ("Waving of the Omer", "יום הנפת העומר",
+        "Leviticus tells Israel to wave the first sheaf of barley 'on the morrow after the sabbath' and to count "
+        "seven full weeks to Shavuot. The rabbis read 'sabbath' as the first festival day of Pesach, so the "
+        "count starts on 16 Nisan. The Boethusians and Sadducees of the Second Temple period, the Qumran "
+        "calendar, and later the Karaites and the Samaritans read it as the weekly Sabbath, so their Omer "
+        "begins on a Sunday and their Shavuot always falls on a Sunday. The Mishnah records the public reaping "
+        "of the Omer as a demonstration against the Boethusian reading.",
+        "Lev 23:9–21; Mishnah Menachot 10:3; Talmud Menachot 65a–66a"),
+    "karaite_fast": ("Karaite fasts of the destruction", "צומות הקראים",
+        "Zechariah names fasts of the fourth, fifth, seventh and tenth months. The rabbis set them on 17 Tammuz, "
+        "9 Av, 3 Tishrei and 10 Tevet. The Karaites keep the dates the Bible gives for the events themselves: "
+        "9 Tammuz for the breach of Jerusalem's wall, 7 and 10 Av for the burning of the Temple (Kings and "
+        "Jeremiah give different days), 24 Tishrei after the assembly of Nehemiah 9, and 10 Tevet for the start "
+        "of the siege.",
+        "Zech 7:3–5, 8:19; 2 Kgs 25:1–9; Jer 39:2, 52:6–12; Neh 9:1"),
+    "samaritan_passover": ("Samaritan Passover sacrifice", "קרבן הפסח השומרוני",
+        "The Samaritans are the only community that still offers the Passover sacrifice. On the evening of the "
+        "14th of the First Month, families gather on Mount Gerizim, where lambs are slaughtered and roasted in "
+        "earthen pits, as in Exodus 12. The Samaritan temple on Gerizim, excavated by Yitzhak Magen, was built "
+        "around the 5th century BCE and destroyed by John Hyrcanus in the late 2nd century BCE. The sacred "
+        "precinct remains the community's holy place, and they climb it in pilgrimage three times a year.",
+        "Exod 12; Deut 16:1–8; Josephus, Antiquities 13.254–256; Y. Magen, Mount Gerizim Excavations II (2008)"),
+    "samaritan_year": ("The Samaritan year", "השנה השומרונית",
+        "Samaritans count years from the entry into Canaan under Joshua. Their months are numbered, the First "
+        "Month being in spring (Exodus 12:2), while the year number advances at the Sixth Month, when in their "
+        "tradition Israel entered the land. The Feast of the Seventh Month, the biblical day of trumpet blasts, "
+        "is called the Samaritan New Year. The calendar is calculated by the priestly family, which publishes it "
+        "twice a year, before Passover and before Sukkot.",
+        "Exod 12:2; Lev 23:23–25; Josh 4:19; B. Tsedaka, The Israelite Samaritan Version of the Torah (2013)"),
 }
 
 _RULES = [
+    ("Sigd", "sigd"), ("Yom Hanafat HaOmer", "hanafat_haomer"), ("Karaite fast", "karaite_fast"),
+    ("Passover sacrifice", "samaritan_passover"), ("Samaritan First Month", "samaritan_year"),
+    ("Feast of the Seventh Month", "samaritan_year"), ("Yom Teruah", "rosh_hashanah"), ("Day of Atonement", "yom_kippur"),
+    ("Feast of Tabernacles", "sukkot"), ("Tabernacles", "sukkot"), ("Eighth Day of Assembly", "shemini_atzeret"),
+    ("Feast of Unleavened Bread", "pesach"), ("Unleavened Bread", "pesach"), ("Chag HaMatzot", "pesach"),
+    ("Pesach / Unleavened Bread", "pesach"), ("Sukkot (first day)", "sukkot"),
     ("Erev Rosh Hashanah", "rosh_hashanah"), ("Rosh Hashanah", "rosh_hashanah"),
     ("Tzom Gedaliah", "tzom_gedaliah"), ("Erev Yom Kippur", "yom_kippur"), ("Yom Kippur", "yom_kippur"),
     ("Erev Sukkot", "sukkot"), ("Sukkot", "sukkot"), ("Hoshana Rabbah", "hoshana_rabbah"),

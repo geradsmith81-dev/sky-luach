@@ -151,8 +151,43 @@ a {{ color: {LINK}; }}
 """
 
 
+# Always dark, whatever the phone or computer is set to and even if .streamlit/config.toml is missing:
+# page background, Streamlit's own text and Streamlit's light-theme widgets (assets/light_mode.css).
+# The app's own HTML (classes starting with "sl-") keeps its colours.
+_SCOPE = ':is([data-testid="stMain"], [data-testid="stDialog"], [data-testid="stPopoverBody"], [data-testid="stSidebar"], [data-testid="stExpander"])'
+_TEXT = (':is(p, li, span, label, small, summary, b, strong, em, td, th, [data-testid="stMarkdownContainer"], '
+         '[data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] *)')
+# NB: no spaces between the :is(...) and :not(...) parts - a space would mean 'descendant of' and break the rule
+_NOT = ''.join(':not(%s)' % x for x in (
+    ':is(h1, h2, h3, h4, h5, h6) *', '[class^="sl-"]', '[class*=" sl-"]', '[class^="sl-"] *', '[class*=" sl-"] *',
+    '[style*="color"]', '[style*="color"] *', 'a', 'a *', 'code', 'code *',
+    '[data-testid="stBaseButton-primary"] *', '[data-testid="stCaptionContainer"] *'))
+FORCE_TEXT_SELECTOR = 'body ' + _SCOPE + ' ' + _TEXT + _NOT
+_FORCE_DARK = (
+    f'.stApp, [data-testid="stApp"], [data-testid="stAppViewContainer"], [data-testid="stMain"] '
+    f'{{ background-color: {BG} !important; }}\n'
+    f'[data-testid="stHeader"] {{ background-color: rgba(26, 18, 12, 0.94) !important; }}\n'
+    f'[data-testid="stSidebar"] > div:first-child {{ background-color: {SIDEBAR} !important; }}\n'
+    + FORCE_TEXT_SELECTOR + f' {{ color: {TEXT} !important; }}\n'
+    f'[data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] :is(p, span, li, b, strong, em) '
+    f'{{ color: {MUTED} !important; }}\n'
+    f'[data-testid="stCaptionContainer"] a, [data-testid="stMarkdownContainer"] a {{ color: {LINK} !important; }}\n'
+    f'h1, h2, h3, h4 {{ color: {GOLD} !important; }}\n'
+    # radio and toggle controls: visible outlines on the dark ground
+    f'[data-testid="stRadio"] label > div:first-child {{ border-color: {MUTED} !important; }}\n')
+
+
+def _light_css() -> str:
+    try:
+        with open(os.path.join(HERE, "assets", "light_mode.css"), encoding="utf-8") as f:
+            return f.read()
+    except OSError:
+        return ""
+
+
 def apply():
     st.html(CSS)
+    st.html("<style>" + _FORCE_DARK + _light_css() + "</style>")
 
 
 def header(subtitle: str = ""):

@@ -61,7 +61,45 @@ Twelve evenings were sampled evenly from 1850 to 2150. At each crescent "best ti
 - Molad minus true conjunction, 3,709 months: mean +2.00 h, standard deviation 7.51 h, range −12.3 to +16.3 h.
 - Rosh Hashanah weekdays in 299 years: Saturday 52, Thursday 49, Tuesday 46, Monday 45, Wednesday 38, Sunday 37, Friday 32. The fixed calendar allows only Monday, Tuesday, Thursday and Saturday.
 
+## 3c. Karaite calendar — checks
+
+- The months are identical to the observed calendar's (3,698 months, 1850–2150), as designed.
+- Shavuot falls on a Sunday in all 298 years. It lands between 5 and 12 Sivan, because the waving of the Omer is on the Sunday within 15–21 Nisan.
+- 196 of 1,490 Karaite fast days fall on Shabbat. They are listed on their biblical dates and not moved.
+- The barley (aviv) is not computable, so the leap month uses the equinox stand-in. Real Karaite years can differ by a month.
+
+## 3d. Samaritan calendar — checked against published community dates
+
+The default rule is the sunset day boundary at Mount Gerizim, with no 8 April floor.
+
+| Published date | Event | Sunset rule | Noon rule (Reingold & Dershowitz) |
+|---|---|---|---|
+| 2001-08-19 | first day of the Sixth Month (year 3640 begins) | ✓ | ✓ |
+| 2016-04-20 | 14th of the First Month (Passover sacrifice) | ✓ | +1 day |
+| 2017-04-10 | 14th of the First Month | ✓ | ✓ |
+| 2017-06-04 | Shavuot | ✓ | ✓ |
+| 2018-04-29 | 14th of the First Month | ✓ | ✓ |
+| 2019-04-18 | 14th of the First Month | ✓ | ✓ |
+| 2020-05-06 | 14th of the First Month | ✓ | ✓ |
+| 2024-04-22 | 14th of the First Month | ✓ | ✓ |
+| 2025-04-11 | 14th of the First Month | ✓ | +1 day |
+| 2025-06-01 | Shavuot | ✓ | +7 days |
+| 2026-04-30 | 14th of the First Month (the 2026 ceremony was brought forward to 10 April because of the war) | ✓ | +1 day |
+| 2026-05-07 | 21st, closing pilgrimage | ✓ | +1 day |
+| 2026-09-11 | first day of the Sixth Month | ✓ | ✓ |
+| 2026-10-11 | Feast of the Seventh Month | ✓ | ✓ |
+
+- Sunset rule: 14 of 14. Noon rule: 9 of 14.
+- The data pin the cut-off between 13:42 and 20:40 sundial time. The conjunctions of 7 Apr 2016 (13:42) and 29 Mar 2025 (13:13) counted for their own day, and that of 8 Apr 2024 (20:40) did not. Sunset, about 18:15 in spring, lies inside that window and is the natural Samaritan day boundary. It is a calibration, not a published Samaritan rule.
+- The 8 April floor would move the First Month in 10 of the years 1850–2150, including 2001, where it contradicts the published start of the Sixth Month.
+- 2013 is left out: a press report (23 April) agrees with the model, but a dated photograph suggests 22 April, which no conjunction rule allows.
+- Structure, 1850–2150: 298 festival cycles, 110 with a thirteenth month. Months are 29 or 30 days. Shavuot is always a Sunday. The 14th of the First Month falls between 6 April and 6 May.
+
 ## 4. What is *not* validated
+
+- Karaite years in which the barley inspection differs from the equinox stand-in.
+- Samaritan dates before 2001 and after 2026 rest on the calibrated rule alone.
+- The Beta Israel reckoning used in Ethiopia (only today's Sigd date is modelled).
 
 - The crescent criteria come from published models: Yallop 1997, NAO Technical Note 69; Odeh 2004, *Experimental Astronomy* 18:39–64. Their formulas are implemented as published, but the app has not been tested against a sighting record for Jerusalem. Real sightings also depend on weather, haze, observer skill and practice. The observational calendar is therefore a reasoned reconstruction, not a record of any historical or present-day practice.
 - The leap-month rule (equinox no later than 15 Nisan, after Rambam, Kiddush HaChodesh 4:2) stands in for the *aviv* (barley ripeness) and the other considerations the Sanhedrin weighed. Those cannot be computed.
