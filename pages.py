@@ -333,7 +333,7 @@ def render_month(ctx):
             dd = (m.start - ostart.start).days
             cmp_rows.append(f"<tr><td>{bi('Observed (sighting)', cv.KIND_HE[cv.OBSERVED])}</td><td>{ostart.start:%a %d %b %Y}</td><td>{'same day' if dd == 0 else f'{-dd:+d} days'}</td></tr>")
         if cmp_rows:
-            body += ("<table class='sl-table'><tr><th>Same month in</th><th>Day 1</th><th>Days after the Pre-Temple start</th></tr>"
+            body += ("<table class='sl-table'><tr><th>Same month in</th><th>Day 1</th><th>Days after the Early Temple start</th></tr>"
                      + "".join(cmp_rows) + "</table>")
         body += ("<div class='sl-muted'>The month starts at the real conjunction, when the Moon is still invisible. "
                  "There is no molad, no sighting and no postponement.</div>")
@@ -450,7 +450,7 @@ def render_compare(ctx):
     cur = min(max(cur, common[0]), common[-1])
     y = st.selectbox("Hebrew year (AM)", common, index=common.index(cur), key="cmp_y",
                      format_func=lambda y: f"{y} ({y - 3761}–{y - 3760})")
-    cals = [("Observed", obs.cal), ("Pre-Temple", pre.cal)]
+    cals = [("Observed", obs.cal), ("Early Temple", pre.cal)]
 
     def dfmt(d):
         return d.strftime("%a %d %b %Y") if d else "—"
@@ -470,7 +470,7 @@ def render_compare(ctx):
         return cal.to_gregorian(y, mm, d)
 
     head = ("<tr><th></th><th>" + bi("Fixed", cv.KIND_HE[cv.FIXED]) + "</th><th>" + bi("Observed", cv.KIND_HE[cv.OBSERVED])
-            + "</th><th>" + bi("Pre-Temple", cv.KIND_HE[cv.PRETEMPLE]) + "</th></tr>")
+            + "</th><th>" + bi("Early Temple", cv.KIND_HE[cv.PRETEMPLE]) + "</th></tr>")
     rows = []
     for name, m, d in oc.COMPARE_HOLIDAYS:
         mf = m if m is not None else (fc.ADAR_II if fc.is_leap(y) else fc.ADAR)
@@ -505,7 +505,7 @@ def render_compare(ctx):
                        "year, so its Pesach has drifted later against the equinox since the 4th century.")
     why.append("Observed months start 1–2 days after the true new moon, because the crescent can only be seen once "
                "the Moon has moved far enough from the Sun.")
-    why.append("Pre-Temple Period months start at the true new moon. The fixed calendar starts from the molad, which is "
+    why.append("Early Temple Period months start at the true new moon. The fixed calendar starts from the molad, which is "
                "a mean new moon up to about 14 hours from the true one, and then applies the postponement rules "
                "(no Rosh Hashanah on Sunday, Wednesday or Friday, among others). So the two agree on the day about half "
                "the time and otherwise differ by 1–2 days.")
@@ -517,7 +517,7 @@ def render_compare(ctx):
     xo, yo = pesach_series("obs", ctx["crit"], ctx["eq"], ctx["nisan_day"])
     xp, yp = pesach_series("pre", ctx["pt_rule"], ctx["eq"], ctx["nisan_day"])
     ax.scatter(xo, yo, s=12, c=theme.OBS, label="Observed (sighting)", marker="o")
-    ax.scatter(xp, [v + 0.0 for v in yp], s=10, c=theme.GOLD, label="Pre-Temple Period", marker="^")
+    ax.scatter(xp, [v + 0.0 for v in yp], s=10, c=theme.GOLD, label="Early Temple Period", marker="^")
     ax.axhline(0, color=theme.MUTED, lw=0.8)
     ax.set_xlabel("Year (CE)", color=theme.TEXT)
     ax.set_ylabel("Minus fixed date (days)", color=theme.TEXT)
@@ -531,7 +531,7 @@ def render_compare(ctx):
     plt.close(fig)
     no = sum(1 for v in yo if abs(v) > 20)
     npre = sum(1 for v in yp if abs(v) > 20)
-    st.caption(f"A month apart from the fixed Pesach (פסח): observed in {no} of {len(yo)} years, Pre-Temple Period in "
+    st.caption(f"A month apart from the fixed Pesach (פסח): observed in {no} of {len(yo)} years, Early Temple Period in "
                f"{npre} of {len(yp)} years. Otherwise they are within a few days of the fixed date.")
 
     with st.expander("Sighting log for this year (observed calendar)"):

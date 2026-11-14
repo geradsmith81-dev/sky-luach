@@ -51,7 +51,7 @@ Twelve evenings were sampled evenly from 1850 to 2150. At each crescent "best ti
 - 1 Tishrei (observed) minus 1 Tishrei (fixed), in days: {-30: 11, -29: 20, -28: 34, -27: 9, 0: 34, 1: 117, 2: 69, 3: 4}. A value near 0 to +2 means the month is the same and begins 0–2 days later than the fixed calendar, because first visibility comes after the conjunction and the molad. Values near −30 mean the observed year has already intercalated relative to the fixed one. With the true equinox this happens in about a quarter of years, because the fixed calendar's year is the year of Rav Adda (365.2468 d), longer than the tropical year (365.2422 d). Since Hillel II it has drifted about 7 days against the equinox.
 
 
-## 3b. Pre-Temple Period calendar (true new moon) — checks
+## 3b. Early Temple Period calendar (true new moon) — checks
 
 - The month starts were computed twice, once from the app's Jerusalem table and once directly from the JPL ephemeris. The day-1 dates are identical for all 3,711 true new moons (1850–2150).
 - The equinox rule gives 298 complete years (AM 5611–5908), of which 110 have 13 months. Months: 1,736 of 29 days and 1,962 of 30 days.
@@ -65,5 +65,5 @@ Twelve evenings were sampled evenly from 1850 to 2150. At each crescent "best ti
 
 - The crescent criteria come from published models: Yallop 1997, NAO Technical Note 69; Odeh 2004, *Experimental Astronomy* 18:39–64. Their formulas are implemented as published, but the app has not been tested against a sighting record for Jerusalem. Real sightings also depend on weather, haze, observer skill and practice. The observational calendar is therefore a reasoned reconstruction, not a record of any historical or present-day practice.
 - The leap-month rule (equinox no later than 15 Nisan, after Rambam, Kiddush HaChodesh 4:2) stands in for the *aviv* (barley ripeness) and the other considerations the Sanhedrin weighed. Those cannot be computed.
-- The Pre-Temple Period calendar is an astronomical ideal. No historical source documents a conjunction-based Jewish calendar.
+- The Early Temple Period calendar is an astronomical ideal. No historical source documents a conjunction-based Jewish calendar.
 - Dates outside 1850–2149 need the larger de440.bsp (1550–2650) in the ephem folder. The precomputed crescent tables would then also need rebuilding (tools/build_tables.py).

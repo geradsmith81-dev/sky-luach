@@ -1,10 +1,10 @@
 # Sky Luach · לוח השמים
 
-The Jewish calendar three ways (**fixed, observed and Pre-Temple Period**) from NASA JPL astronomy (DE440s via Skyfield).
+The Jewish calendar three ways (**fixed, observed and Early Temple Period**) from NASA JPL astronomy (DE440s via Skyfield).
 
 - **Fixed (rabbinic) · הלוח הקבוע:** the calendar used today (molad, 19-year cycle, postponements), with holidays, fasts, the weekly Torah portion, and Israel or diaspora custom. For 1850–2149 it was checked day by day against pyluach and convertdate, with 0 differences.
 - **Observed (sighting) · קידוש החודש על פי הראייה:** a Temple-period reconstruction. Months begin at the first crescent predicted visible from Jerusalem (Yallop or Odeh criteria), and the leap month follows the spring equinox (Rambam, *Kiddush HaChodesh* 4:2).
-- **Pre-Temple Period · לוח טרום המקדש:** months begin at the true astronomical new moon, counted from year 1. It is an astronomical ideal for comparison, not a documented historical calendar.
+- **Early Temple Period · לוח תקופת המקדש הקדומה:** months begin at the true astronomical new moon, counted from year 1. It is an astronomical ideal for comparison, not a documented historical calendar.
 - **Finds your location** automatically (asks the browser once) and gives **a short history of every holiday** when you click its name.
 - **Pages:** Today, Month, Year & holidays (with .ics and .csv downloads), Compare, Cycles, How it works.
 - **Design:** proper nouns also appear in Hebrew letters, and the look follows First Temple period art.

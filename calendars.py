@@ -12,9 +12,9 @@ from fixed_calendar import HDate, Holiday
 
 FIXED = "Fixed (rabbinic)"
 OBSERVED = "Observed (sighting)"
-PRETEMPLE = "Pre-Temple Period"
+PRETEMPLE = "Early Temple Period"
 ALL = [FIXED, OBSERVED, PRETEMPLE]
-KIND_HE = {FIXED: "הלוח הקבוע", OBSERVED: "קידוש החודש על פי הראייה", PRETEMPLE: "לוח טרום המקדש"}
+KIND_HE = {FIXED: "הלוח הקבוע", OBSERVED: "קידוש החודש על פי הראייה", PRETEMPLE: "לוח תקופת המקדש הקדומה"}
 
 
 @dataclass
@@ -160,7 +160,7 @@ class ObservedView:
 
 class PreTempleView(ObservedView):
     kind = PRETEMPLE
-    short = "Pre-Temple"
+    short = "Early Temple"
 
     def __init__(self, rule: str, equinox: str, nisan_day: int, omer: bool):
         self.cal = ptc.PreTempleCalendar(rule, equinox, nisan_day)

@@ -121,7 +121,7 @@ H = {
         "Passover, then counting seven weeks to Shavuot. The rabbis read 'Sabbath' as the first day of the "
         "festival, so the count starts on 16 Nisan. The Boethusians, and later the Karaites, counted from the "
         "Sunday instead. The weeks later became a time of semi-mourning for Rabbi Akiva's students. This app's "
-        "observed and Pre-Temple calendars count Shavuot from 16 Nisan, following the rabbinic reading.",
+        "observed and Early Temple calendars count Shavuot from 16 Nisan, following the rabbinic reading.",
         "Lev 23:9–16; Deut 16:9–10; Mishnah Menachot 10; Talmud Menachot 65a–66a; Yevamot 62b"),
     "lag_baomer": ("Lag BaOmer", "ל״ג בעומר",
         "The 33rd day of the Omer (18 Iyyar) breaks the mourning of the counting weeks. The Talmud says Rabbi "

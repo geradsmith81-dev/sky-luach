@@ -42,7 +42,7 @@ def observed_view(crit, eq, nd, omer):
     return cv.ObservedView(crit, eq, nd, omer)
 
 
-@st.cache_resource(show_spinner="Building the Pre-Temple Period calendar from the true new moons…", max_entries=12)
+@st.cache_resource(show_spinner="Building the Early Temple Period calendar from the true new moons…", max_entries=12)
 def pretemple_view(rule, eq, nd, omer):
     return cv.PreTempleView(rule, eq, nd, omer)
 
@@ -94,7 +94,7 @@ with c1:
                    help="Fixed: the rabbinic calendar of Hillel II, used by Jewish communities today. "
                         "Observed: months begin when the young crescent is (predicted) visible from Jerusalem, "
                         "and the leap month follows the spring equinox, as in the Second Temple period. "
-                        "Pre-Temple Period: months begin at the true astronomical new moon (an astronomical "
+                        "Early Temple Period: months begin at the true astronomical new moon (an astronomical "
                         "ideal, counted from year 1).")
 with c2:
     page = st.radio("Page", list(PAGES), key="page", horizontal=True, format_func=lambda k: PAGES[k][0],
@@ -155,7 +155,7 @@ with panel:
     omer = st.toggle("Show the Omer count · ספירת העומר", value=False, key="omer")
 
     st.subheader("Sighting rules · קידוש החודש")
-    st.caption("Used by the observed calendar (and by the Pre-Temple Period calendar's equinox rule).")
+    st.caption("Used by the observed calendar (and by the Early Temple Period calendar's equinox rule).")
     crit = st.selectbox("Crescent visibility from Jerusalem", list(oc.CRITERIA), key="crit",
                         format_func=lambda k: oc.CRITERIA[k])
     eq = st.selectbox("Spring marker for the leap month", list(oc.EQUINOX_SOURCES), key="eq",
@@ -165,7 +165,7 @@ with panel:
                                  help="15 follows Rambam, Kiddush HaChodesh 4:2: if the tekufah would fall on 16 Nisan "
                                       "or later, the year was given a second Adar.")
 
-    st.subheader("Pre-Temple Period · לוח טרום המקדש")
+    st.subheader("Early Temple Period · לוח תקופת המקדש הקדומה")
     pt_rule = st.selectbox("Leap month", list(ptc.LEAP_RULES), key="pt_rule", format_func=lambda k: ptc.LEAP_RULES[k],
                            help="Months always begin at the true new moon. This only decides which years get a "
                                 "second Adar.")

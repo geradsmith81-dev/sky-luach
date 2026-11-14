@@ -25,7 +25,7 @@ This is a reconstruction of how the calendar worked while the Sanhedrin (סנה�
 
 **Limits.** No formula can know the weather, the eyesight of witnesses, the state of the barley (the *aviv*), or the court's other considerations. Read this calendar as a reasoned model of how a sighting calendar behaves, not as a record of any particular year's practice, and not as a guide to practice today.
 
-### 2b. The Pre-Temple Period calendar · לוח טרום המקדש
+### 2b. The Early Temple Period calendar · לוח תקופת המקדש הקדומה
 
 This calendar asks what the Jewish calendar would look like if it followed the true astronomical new moon from year 1.
 
@@ -44,7 +44,7 @@ This calendar asks what the Jewish calendar would look like if it followed the t
 - **Leap years:** with the 19-year cycle, Pesach is never a month away from the fixed date. With the equinox rule, it is a month away in 65 of 298 years, about as often as in the observed calendar (74 of 298).
 - **Drift of the molad:** the molad's mean month is about 0.46 seconds longer than the true one. You can see it creeping: the mean molad−conjunction offset is +1.81 h in 1850–1949, +2.00 h in 1950–2049 and +2.19 h in 2050–2149.
 
-**A caution.** No archaeological or textual evidence shows that a conjunction-based calendar was used in ancient Israel or Judah. Biblical and rabbinic practice began the month with the first visible crescent; the Hebrew *chodesh* means "renewal". The name *Pre-Temple Period* labels this astronomical ideal. It is not a reconstruction of documented practice. Its first month (Tishrei AM 1, autumn 3761 BCE) also lies outside DE440s. It would need the much larger DE441 file and an estimate of Earth's rotation 5,800 years ago, and that estimate is uncertain by more than enough to move a conjunction across sunset.
+**A caution.** No archaeological or textual evidence shows that a conjunction-based calendar was used in ancient Israel or Judah. Biblical and rabbinic practice began the month with the first visible crescent; the Hebrew *chodesh* means "renewal". The name *Early Temple Period* is only a label for this astronomical ideal. It does not mean the calendar was used in the First Temple period, and it is not a reconstruction of documented practice. Its first month (Tishrei AM 1, autumn 3761 BCE) also lies outside DE440s. It would need the much larger DE441 file and an estimate of Earth's rotation 5,800 years ago, and that estimate is uncertain by more than enough to move a conjunction across sunset.
 
 ### 3. The astronomy · האסטרונומיה
 

@@ -1,5 +1,5 @@
 """
-The Pre-Temple Period calendar (לוח טרום המקדש): an astronomical ideal.
+The Early Temple Period calendar (לוח תקופת המקדש הקדומה): an astronomical ideal.
 
 * Each month begins at the TRUE new moon: day 1 starts at the first sunset in Jerusalem after the
   geocentric conjunction computed from NASA JPL DE440s. No mean molad, no crescent sighting,

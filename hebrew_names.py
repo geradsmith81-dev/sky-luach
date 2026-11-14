@@ -22,7 +22,7 @@ GRID_WEEK = [("Sun", "א׳"), ("Mon", "ב׳"), ("Tue", "ג׳"), ("Wed", "ד׳"),
 TERMS = {
     "Fixed (rabbinic)": "הלוח הקבוע",
     "Observed (sighting)": "קידוש החודש על פי הראייה",
-    "Pre-Temple Period": "לוח טרום המקדש",
+    "Early Temple Period": "לוח תקופת המקדש הקדומה",
     "true new moon": "המולד האמיתי",
     "Sky Luach": "לוח השמים",
     "Jerusalem": "ירושלים",
