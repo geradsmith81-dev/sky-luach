@@ -32,3 +32,7 @@ streamlit run app.py
 Dates run from 1850 to 2149. Put de440.bsp in `ephem/` to extend the times and moon phases to 1550–2650; the observed calendar's tables then need rebuilding with `python tools/build_tables.py`.
 
 The Paleo-Hebrew font is Noto Sans Phoenician, © The Noto Project Authors, under the SIL Open Font License (`assets/NotoSansPhoenician_OFL.txt`).
+
+## License
+
+Sky Luach is released under the [MIT License](LICENSE), © 2026 Gerad Smith. Bundled third-party material keeps its own terms; see [THIRD_PARTY.md](THIRD_PARTY.md). These include the Noto Sans Phoenician font (SIL Open Font License, `assets/NotoSansPhoenician_OFL.txt`), the NASA JPL DE440s ephemeris, and the GeoNames town list (CC BY 4.0).
