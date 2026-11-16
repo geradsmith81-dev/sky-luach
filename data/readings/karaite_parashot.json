@@ -1,0 +1,931 @@
+{
+ "meta": {
+  "title": "Karaite weekly Torah portions and haftarot (Egyptian Karaite tradition)",
+  "source": "KJA-A: Karaite Jews of America, 'Torah Audio - Karaite Parashiot and Haftarot', https://karaites.org/torah-audio/ ; KJA-P: Karaite Jews of America, 'Torah Portions' and per-portion commentary pages, https://karaites.org/torah-portions/ ; KALE: Seder ha-Haftarot (Kale, 1733), Karaite column as tabulated in A. Marsh, 'The Sequential Triennial Cycle: A History and Guide to its Modern Use', Master's project, Academy for Jewish Religion, 2015, Table 2, pp. 36-38.",
+  "license": "Facts only (portion names, verse references); no text of the sources is reproduced beyond the short reference strings in kja_printed. Compilation released with the app under the MIT licence.",
+  "attribution": "Portion and haftarah list after the Karaite Jews of America (karaites.org).",
+  "transcribed": "2026-11-16",
+  "verse_numbering": "Hebrew (Masoretic) chapter:verse numbering, as in data/readings/torah_mt.json.gz.",
+  "total_verses": 5847
+ },
+ "parashot": [
+  {
+   "num": 1,
+   "name_en": "Bereshit",
+   "name_he": "בְּרֵאשִׁית",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "1:1",
+   "to": "6:8",
+   "verses": 146,
+   "haftarah": "Isaiah 65:17-66:13",
+   "haftarah_kale_1733": "Isaiah 65:17-66:13",
+   "kja_printed": {
+    "torah": "Genesis 1:1 – 6:8",
+    "haftarah": "Isaiah 65:17 – 66:13"
+   },
+   "correction": ""
+  },
+  {
+   "num": 2,
+   "name_en": "Noah",
+   "name_he": "נֹחַ",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "6:9",
+   "to": "11:32",
+   "verses": 153,
+   "haftarah": "Isaiah 54:9-55:12",
+   "haftarah_kale_1733": "Isaiah 54:9-55:12",
+   "kja_printed": {
+    "torah": "Genesis 6:9 – 11:32",
+    "haftarah": "Isaiah 54:9 – 55:12"
+   },
+   "correction": ""
+  },
+  {
+   "num": 3,
+   "name_en": "Lekh Lekha",
+   "name_he": "לֶךְ לְךָ",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "12:1",
+   "to": "17:27",
+   "verses": 126,
+   "haftarah": "Joshua 24:3-18",
+   "haftarah_kale_1733": "Joshua 24:3-23",
+   "kja_printed": {
+    "torah": "Genesis 12:1-17:27",
+    "haftarah": "Joshua 24:3 – 24:18"
+   },
+   "correction": ""
+  },
+  {
+   "num": 4,
+   "name_en": "Vayyera",
+   "name_he": "וַיֵּרָא",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "18:1",
+   "to": "22:24",
+   "verses": 147,
+   "haftarah": "Isaiah 33:17-35:10",
+   "haftarah_kale_1733": "Isaiah 33:17-34:12, 35:10",
+   "kja_printed": {
+    "torah": "Genesis:18:1-22:24",
+    "haftarah": "33:17 – 35:10"
+   },
+   "correction": "KJA-A omits the book of the haftarah; Isaiah supplied (KALE gives Isaiah 33:17-34:12, 35:10 for this portion)."
+  },
+  {
+   "num": 5,
+   "name_en": "Hayyei Sarah",
+   "name_he": "חַיֵּי שָׂרָה",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "23:1",
+   "to": "25:18",
+   "verses": 105,
+   "haftarah": "Isaiah 51:2-22",
+   "haftarah_kale_1733": "Isaiah 51:2-22",
+   "kja_printed": {
+    "torah": "Genesis 23:1-25:18",
+    "haftarah": "Isaiah 51:2-51:22"
+   },
+   "correction": ""
+  },
+  {
+   "num": 6,
+   "name_en": "Toledot",
+   "name_he": "תּוֹלְדֹת",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "25:19",
+   "to": "28:9",
+   "verses": 106,
+   "haftarah": "Isaiah 65:23-66:18",
+   "haftarah_kale_1733": "Isaiah 65:23-66:18",
+   "kja_printed": {
+    "torah": "Genesis 25:19-28:9",
+    "haftarah": "Isaiah 65:23-66:18"
+   },
+   "correction": ""
+  },
+  {
+   "num": 7,
+   "name_en": "Vayyetze",
+   "name_he": "וַיֵּצֵא",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "28:10",
+   "to": "32:3",
+   "verses": 148,
+   "haftarah": "Hosea 11:7-13:5",
+   "haftarah_kale_1733": "Hosea 11:7-12:12 or Hosea 12:13-14:10",
+   "kja_printed": {
+    "torah": "Genesis 28:10-32:3",
+    "haftarah": "Hosea 11:7-13:5"
+   },
+   "correction": ""
+  },
+  {
+   "num": 8,
+   "name_en": "Vayishlach",
+   "name_he": "וַיִּשְׁלַח",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "32:4",
+   "to": "36:43",
+   "verses": 153,
+   "haftarah": "Obadiah 1:1-21",
+   "haftarah_kale_1733": "Obadiah 1:1-21",
+   "kja_printed": {
+    "torah": "Genesis 32:4-36:43",
+    "haftarah": "Ovadiah 1:1-21"
+   },
+   "correction": ""
+  },
+  {
+   "num": 9,
+   "name_en": "Vayeshev",
+   "name_he": "וַיֵּשֶׁב",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "37:1",
+   "to": "40:23",
+   "verses": 112,
+   "haftarah": "Isaiah 32:18-33:22",
+   "haftarah_kale_1733": "Isaiah 32:18-33:22",
+   "kja_printed": {
+    "torah": "Genesis 37:1-40:23",
+    "haftarah": "Isaiah 32:18-33:22"
+   },
+   "correction": ""
+  },
+  {
+   "num": 10,
+   "name_en": "Mikketz",
+   "name_he": "מִקֵּץ",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "41:1",
+   "to": "44:17",
+   "verses": 146,
+   "haftarah": "Isaiah 29:7-24",
+   "haftarah_kale_1733": "Isaiah 29:7-30:3",
+   "kja_printed": {
+    "torah": "Genesis 41:1-44:17",
+    "haftarah": "Isaiah 29:7-24"
+   },
+   "correction": ""
+  },
+  {
+   "num": 11,
+   "name_en": "Vayigash",
+   "name_he": "וַיִּגַּשׁ",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "44:18",
+   "to": "47:27",
+   "verses": 106,
+   "haftarah": "Joshua 14:6-15",
+   "haftarah_kale_1733": "Joshua 14:6-15:6",
+   "kja_printed": {
+    "torah": "Genesis 44:18-47:27",
+    "haftarah": "Joshua 14:6-14:15"
+   },
+   "correction": ""
+  },
+  {
+   "num": 12,
+   "name_en": "Vayechi",
+   "name_he": "וַיְחִי",
+   "name_he_source": "KJA-P",
+   "book": "Genesis",
+   "from": "47:28",
+   "to": "50:26",
+   "verses": 85,
+   "haftarah": "2 Kings 13:14-14:7",
+   "haftarah_kale_1733": "2 Kings 13:14-14:7",
+   "kja_printed": {
+    "torah": "Genesis 47:28-50:26",
+    "haftarah": "2 Kings: 13:14-14:7"
+   },
+   "correction": ""
+  },
+  {
+   "num": 13,
+   "name_en": "Shemot",
+   "name_he": "שְׁמוֹת",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "1:1",
+   "to": "6:1",
+   "verses": 124,
+   "haftarah": "Isaiah 27:6-28:13",
+   "haftarah_kale_1733": "Isaiah 26:7-27:6 or Isaiah 27:6-28:13",
+   "kja_printed": {
+    "torah": "Exodus 1:1-6:1",
+    "haftarah": "Isaiah 27:6-28:13"
+   },
+   "correction": ""
+  },
+  {
+   "num": 14,
+   "name_en": "Vaera",
+   "name_he": "וָאֵרָא",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "6:2",
+   "to": "9:35",
+   "verses": 121,
+   "haftarah": "Isaiah 33:17-34:12, 35:10",
+   "haftarah_kale_1733": "Isaiah 42:8-43:5",
+   "kja_printed": {
+    "torah": "Ex. 6:2-9:35",
+    "haftarah": "Isaiah 33:17-34:12, 35:10"
+   },
+   "correction": "KJA-A gives the same haftarah as for Vayyera; KALE gives Isaiah 42:8-43:5 for Vaera."
+  },
+  {
+   "num": 15,
+   "name_en": "Bo",
+   "name_he": "בֹּא",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "10:1",
+   "to": "13:16",
+   "verses": 106,
+   "haftarah": "Isaiah 34:11-35:10",
+   "haftarah_kale_1733": "Isaiah 34:11-35:10",
+   "kja_printed": {
+    "torah": "Exodus 10:1-13:6",
+    "haftarah": "Isaiah 34:11-35:10"
+   },
+   "correction": "KJA-A prints Exodus 10:1-13:6 and Beshalach 13:7-; KJA-P gives Ex. 10:1-13:16 and 13:17-17:16, used here."
+  },
+  {
+   "num": 16,
+   "name_en": "Beshalach",
+   "name_he": "בְּשַׁלַּח",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "13:17",
+   "to": "17:16",
+   "verses": 116,
+   "haftarah": "Joshua 24:7-26",
+   "haftarah_kale_1733": "Joshua 24:7-26",
+   "kja_printed": {
+    "torah": "Exodus 13:7-17:16",
+    "haftarah": "Joshua 24:7-24:26"
+   },
+   "correction": "See Bo."
+  },
+  {
+   "num": 17,
+   "name_en": "Yitro",
+   "name_he": "יִתְרוֹ",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "18:1",
+   "to": "20:23",
+   "verses": 75,
+   "haftarah": "Isaiah 33:14-34:8",
+   "haftarah_kale_1733": "Isaiah 33:13-34:8",
+   "kja_printed": {
+    "torah": "Exodus 18:1 – 20:26",
+    "haftarah": "Isaiah 33:14 – 34:8"
+   },
+   "correction": "KJA-A ends at 20:26 (English verse numbering of Exodus 20); in Hebrew numbering the chapter ends at 20:23. KJA-P's first section starts at Ex. 18:1 (its heading misprints 17:1)."
+  },
+  {
+   "num": 18,
+   "name_en": "Mishpatim",
+   "name_he": "מִשְׁפָּטִים",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "21:1",
+   "to": "24:18",
+   "verses": 118,
+   "haftarah": "Isaiah 56:1-57:2",
+   "haftarah_kale_1733": "Isaiah 56:1-57:2 or Isaiah 56:1-57:14",
+   "kja_printed": {
+    "torah": "Exodus 21:1-24:18",
+    "haftarah": "Isaiah 56:1-57:2"
+   },
+   "correction": ""
+  },
+  {
+   "num": 19,
+   "name_en": "Terumah",
+   "name_he": "תְּרוּמָה",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "25:1",
+   "to": "27:19",
+   "verses": 96,
+   "haftarah": "Isaiah 60:17-61:9",
+   "haftarah_kale_1733": "Isaiah 60:17-61:9",
+   "kja_printed": {
+    "torah": "Exodus 25:1-27:19",
+    "haftarah": "Isaiah 60:17-61:9"
+   },
+   "correction": ""
+  },
+  {
+   "num": 20,
+   "name_en": "Tetzaveh",
+   "name_he": "תְּצַוֶּה",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "27:20",
+   "to": "30:10",
+   "verses": 101,
+   "haftarah": "Jeremiah 11:16-12:15",
+   "haftarah_kale_1733": "Jeremiah 11:16-12:15",
+   "kja_printed": {
+    "torah": "Exodus 27:20-30:10",
+    "haftarah": "Jeremiah 11:16-12:15"
+   },
+   "correction": ""
+  },
+  {
+   "num": 21,
+   "name_en": "Ki Tissa",
+   "name_he": "כִּי תִשָּׂא",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "30:11",
+   "to": "34:35",
+   "verses": 139,
+   "haftarah": "Isaiah 43:7-44:5",
+   "haftarah_kale_1733": "Isaiah 43:7-44:5",
+   "kja_printed": {
+    "torah": "Exodus 20:11-34:35",
+    "haftarah": "Isaiah 43:7-44:5"
+   },
+   "correction": "KJA-A prints 20:11 (misprint); KJA-P gives Ex. 30:11-34:35."
+  },
+  {
+   "num": 22,
+   "name_en": "Vayakhel",
+   "name_he": "וַיַּקְהֵל",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "35:1",
+   "to": "38:20",
+   "verses": 122,
+   "haftarah": "1 Kings 8:1-19",
+   "haftarah_kale_1733": "1 Kings 8:1-19",
+   "kja_printed": {
+    "torah": "Exodus 35:1-38:20",
+    "haftarah": "1 Kings 8:1-8:19"
+   },
+   "correction": ""
+  },
+  {
+   "num": 23,
+   "name_en": "Pekudei",
+   "name_he": "פְּקוּדֵי",
+   "name_he_source": "KJA-P",
+   "book": "Exodus",
+   "from": "38:21",
+   "to": "40:38",
+   "verses": 92,
+   "haftarah": "Jeremiah 30:18-31:13",
+   "haftarah_kale_1733": "Jeremiah 30:18-31:13",
+   "kja_printed": {
+    "torah": "Exodus 38:21-40:38",
+    "haftarah": "Jeremiah 30:18-31:13"
+   },
+   "correction": ""
+  },
+  {
+   "num": 24,
+   "name_en": "Vayikra",
+   "name_he": "וַיִּקְרָא",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "1:1",
+   "to": "5:26",
+   "verses": 111,
+   "haftarah": "Isaiah 43:21-44:23",
+   "haftarah_kale_1733": "Isaiah 43:21-44:22",
+   "kja_printed": {
+    "torah": "Leviticus 1:1-5:26",
+    "haftarah": "Isaiah 43:21-44:23"
+   },
+   "correction": ""
+  },
+  {
+   "num": 25,
+   "name_en": "Tzav",
+   "name_he": "צַו",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "6:1",
+   "to": "8:36",
+   "verses": 97,
+   "haftarah": "Malachi 3:4-24, 3:23",
+   "haftarah_kale_1733": "Malachi 3:4-24",
+   "kja_printed": {
+    "torah": "Leviticus 6:1-8:36",
+    "haftarah": "Malachi 3:4-3:24, 3:23"
+   },
+   "correction": "Verse 3:23 is repeated after the end of the book."
+  },
+  {
+   "num": 26,
+   "name_en": "Shemini",
+   "name_he": "שְׁמִינִי",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "9:1",
+   "to": "11:47",
+   "verses": 91,
+   "haftarah": "Ezekiel 43:27-44:16",
+   "haftarah_kale_1733": "Ezekiel 43:27-44:16 or Ezekiel 43:27-44:24",
+   "kja_printed": {
+    "torah": "Leviticus 9:11-11:47",
+    "haftarah": "Ezekiel 43:27 – 44:16"
+   },
+   "correction": "KJA-A prints 9:11 (misprint); KJA-P gives Lev. 9:1-11:47."
+  },
+  {
+   "num": 27,
+   "name_en": "Tazria",
+   "name_he": "תַּזְרִיעַ",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "12:1",
+   "to": "13:59",
+   "verses": 67,
+   "haftarah": "2 Kings 7:3-20",
+   "haftarah_kale_1733": "Isaiah 66:7-66:24, 66:23",
+   "kja_printed": {
+    "torah": "Leviticus 12:1-13:59",
+    "haftarah": "2 Kings 7:3-7:20"
+   },
+   "correction": "KALE gives Isaiah 66:7-24, 66:23 for Tazria."
+  },
+  {
+   "num": 28,
+   "name_en": "Metzora",
+   "name_he": "מְצֹרָע",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "14:1",
+   "to": "15:33",
+   "verses": 90,
+   "haftarah": "2 Kings 7:3-18",
+   "haftarah_kale_1733": "2 Kings 7:1-18 or 2 Kings 7:3-18",
+   "kja_printed": {
+    "torah": "Leviticus 14:1-15:33",
+    "haftarah": "2 Kings 7:3-18"
+   },
+   "correction": ""
+  },
+  {
+   "num": 29,
+   "name_en": "Acharei Mot",
+   "name_he": "אַחֲרֵי מוֹת",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "16:1",
+   "to": "18:30",
+   "verses": 80,
+   "haftarah": "Ezekiel 22:1-16",
+   "haftarah_kale_1733": "Ezekiel 22:1-22",
+   "kja_printed": {
+    "torah": "Leviticus 16:1-18:30",
+    "haftarah": "Ezekiel 22:1-16"
+   },
+   "correction": ""
+  },
+  {
+   "num": 30,
+   "name_en": "Kedoshim",
+   "name_he": "קְדֹשִׁים",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "19:1",
+   "to": "20:27",
+   "verses": 64,
+   "haftarah": "Isaiah 4:3-5:16",
+   "haftarah_kale_1733": "Isaiah 4:3-5:16",
+   "kja_printed": {
+    "torah": "Leviticus 19:1-20:27",
+    "haftarah": "Isaiah 4:3-5:16"
+   },
+   "correction": ""
+  },
+  {
+   "num": 31,
+   "name_en": "Emor",
+   "name_he": "אֱמֹר",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "21:1",
+   "to": "24:23",
+   "verses": 124,
+   "haftarah": "Ezekiel 44:25-45:11",
+   "haftarah_kale_1733": "Ezekiel 44:25-45:11",
+   "kja_printed": {
+    "torah": "Leviticus 21:1-24:3",
+    "haftarah": "Ezekiel 44:25-45:11"
+   },
+   "correction": "KJA-A prints 24:3 (misprint); KJA-P gives Lev. 21:1-24:23."
+  },
+  {
+   "num": 32,
+   "name_en": "Behar Sinai",
+   "name_he": "בְּהַר סִינַי",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "25:1",
+   "to": "26:2",
+   "verses": 57,
+   "haftarah": "Isaiah 24:2-23",
+   "haftarah_kale_1733": "Isaiah 24:2-23 or Jeremiah 16:19-17:14",
+   "kja_printed": {
+    "torah": "Leviticus 25:1-26:2",
+    "haftarah": "Isaiah 24:2-23"
+   },
+   "correction": ""
+  },
+  {
+   "num": 33,
+   "name_en": "Bechukotai",
+   "name_he": "בְּחֻקֹּתַי",
+   "name_he_source": "KJA-P",
+   "book": "Leviticus",
+   "from": "26:3",
+   "to": "27:34",
+   "verses": 78,
+   "haftarah": "Isaiah 1:19-2:11",
+   "haftarah_kale_1733": "Isaiah 1:19-2:17",
+   "kja_printed": {
+    "torah": "Leviticus 26:3-27:34",
+    "haftarah": "Isaiah 1:19-2:11"
+   },
+   "correction": ""
+  },
+  {
+   "num": 34,
+   "name_en": "Bamidbar",
+   "name_he": "בְּמִדְבַּר",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "1:1",
+   "to": "4:20",
+   "verses": 159,
+   "haftarah": "Hosea 2:1-22",
+   "haftarah_kale_1733": "Hosea 2:1-22",
+   "kja_printed": {
+    "torah": "Numbers 1:1-4:20",
+    "haftarah": "Hosea 2:1-2:22"
+   },
+   "correction": ""
+  },
+  {
+   "num": 35,
+   "name_en": "Nasso",
+   "name_he": "נָשֹׂא",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "4:21",
+   "to": "7:89",
+   "verses": 176,
+   "haftarah": "Judges 13:2-24",
+   "haftarah_kale_1733": "Judges 13:2-24 or Hosea 4:14-6:2",
+   "kja_printed": {
+    "torah": "Numbers 4:21-7:89",
+    "haftarah": "Judges 13:2-13:24"
+   },
+   "correction": ""
+  },
+  {
+   "num": 36,
+   "name_en": "Beha'alotekha",
+   "name_he": "בְּהַעֲלֹתְךָ",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "8:1",
+   "to": "12:16",
+   "verses": 136,
+   "haftarah": "Zechariah 2:14-4:7",
+   "haftarah_kale_1733": "Zechariah 2:14-4:7",
+   "kja_printed": {
+    "torah": "Numbers 8:1-12:16",
+    "haftarah": "Zechariah 2:14-4:7"
+   },
+   "correction": ""
+  },
+  {
+   "num": 37,
+   "name_en": "Shelah",
+   "name_he": "שְׁלַח",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "13:1",
+   "to": "15:41",
+   "verses": 119,
+   "haftarah": "Joshua 2:1-16",
+   "haftarah_kale_1733": "Joshua 2:1-15 or Joshua 2:1-24",
+   "kja_printed": {
+    "torah": "Numbers 13:1-15:31",
+    "haftarah": "Joshua 2:1-16"
+   },
+   "correction": "KJA-A prints 15:31; KJA-P gives Num. 13:1-15:41 (end of chapter 15)."
+  },
+  {
+   "num": 38,
+   "name_en": "Korach",
+   "name_he": "קֹרַח",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "16:1",
+   "to": "18:32",
+   "verses": 95,
+   "haftarah": "Hosea 10:2-11:9",
+   "haftarah_kale_1733": "Hosea 10:2-11:9",
+   "kja_printed": {
+    "torah": "Numbers 16:1-18:32",
+    "haftarah": "Hosea 10:2-11:9"
+   },
+   "correction": ""
+  },
+  {
+   "num": 39,
+   "name_en": "Chukat",
+   "name_he": "חֻקַּת",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "19:1",
+   "to": "22:1",
+   "verses": 87,
+   "haftarah": "Judges 11:1-17",
+   "haftarah_kale_1733": "Judges 11:1-17 or Judges 11:1-25",
+   "kja_printed": {
+    "torah": "Numbers 19:1-22:1",
+    "haftarah": "Judges 11:1-11:17"
+   },
+   "correction": ""
+  },
+  {
+   "num": 40,
+   "name_en": "Balak",
+   "name_he": "בָּלָק",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "22:2",
+   "to": "25:9",
+   "verses": 104,
+   "haftarah": "Micah 5:6-6:8",
+   "haftarah_kale_1733": "Micah 5:6-6:8",
+   "kja_printed": {
+    "torah": "Numbers 22:2 – 25:9",
+    "haftarah": "Micah 5:6-6:8"
+   },
+   "correction": ""
+  },
+  {
+   "num": 41,
+   "name_en": "Pinchas",
+   "name_he": "פִּינְחָס",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "25:10",
+   "to": "30:1",
+   "verses": 169,
+   "haftarah": "Malachi 2:5-3:3",
+   "haftarah_kale_1733": "Malachi 2:5-3:3",
+   "kja_printed": {
+    "torah": "Numbers 25:10 – 30:1",
+    "haftarah": "Malachai 2:5-3:3"
+   },
+   "correction": ""
+  },
+  {
+   "num": 42,
+   "name_en": "Matot",
+   "name_he": "מַטּוֹת",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "30:2",
+   "to": "32:42",
+   "verses": 112,
+   "haftarah": "Jeremiah 1:1-2:3",
+   "haftarah_kale_1733": "1 Samuel 1:1-2:10",
+   "kja_printed": {
+    "torah": "Numbers 30:2-32:42",
+    "haftarah": "Jeremiah 1:1-2:3"
+   },
+   "correction": "KALE gives 1 Samuel 1:1-2:10 for Matot."
+  },
+  {
+   "num": 43,
+   "name_en": "Masei",
+   "name_he": "מַסְעֵי",
+   "name_he_source": "KJA-P",
+   "book": "Numbers",
+   "from": "33:1",
+   "to": "36:13",
+   "verses": 132,
+   "haftarah": "Joshua 20:1-9",
+   "haftarah_kale_1733": "Joshua 20:1-9 or Ezekiel 46:24-47:21",
+   "kja_printed": {
+    "torah": "Numbers 33:1-36:13",
+    "haftarah": "Joshua 20:1-20:9"
+   },
+   "correction": ""
+  },
+  {
+   "num": 44,
+   "name_en": "Devarim",
+   "name_he": "דְּבָרִים",
+   "name_he_source": "KJA-P",
+   "book": "Deuteronomy",
+   "from": "1:1",
+   "to": "3:22",
+   "verses": 105,
+   "haftarah": "Isaiah 1:1-27",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 1:1-3:22",
+    "haftarah": "Isaiah 1:1-1:27"
+   },
+   "correction": ""
+  },
+  {
+   "num": 45,
+   "name_en": "Va'etchanan",
+   "name_he": "וָאֶתְחַנַּן",
+   "name_he_source": "KJA-P",
+   "book": "Deuteronomy",
+   "from": "3:23",
+   "to": "7:11",
+   "verses": 122,
+   "haftarah": "Isaiah 40:1-22",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 3:23-7:11",
+    "haftarah": "Isaiah 40:1-40:22"
+   },
+   "correction": ""
+  },
+  {
+   "num": 46,
+   "name_en": "Ekev",
+   "name_he": "עֵקֶב",
+   "name_he_source": "incipit of Deuteronomy 7:12 (Masoretic text)",
+   "book": "Deuteronomy",
+   "from": "7:12",
+   "to": "11:25",
+   "verses": 111,
+   "haftarah": "Isaiah 49:14-50:5",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 7:12-11:25",
+    "haftarah": "Isaiah 49:14-50:5"
+   },
+   "correction": ""
+  },
+  {
+   "num": 47,
+   "name_en": "Re'eh",
+   "name_he": "רְאֵה",
+   "name_he_source": "incipit of Deuteronomy 11:26 (Masoretic text)",
+   "book": "Deuteronomy",
+   "from": "11:26",
+   "to": "16:17",
+   "verses": 126,
+   "haftarah": "Isaiah 54:11-56:1",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 11:26-16-17",
+    "haftarah": "Isaiah 54:11–56:1"
+   },
+   "correction": "KJA-A prints 16-17 for 16:17."
+  },
+  {
+   "num": 48,
+   "name_en": "Shofetim",
+   "name_he": "שֹׁפְטִים",
+   "name_he_source": "incipit of Deuteronomy 16:18 (Masoretic text)",
+   "book": "Deuteronomy",
+   "from": "16:18",
+   "to": "21:9",
+   "verses": 97,
+   "haftarah": "Isaiah 51:12-52:8",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 16:18-21:9",
+    "haftarah": "Isaiah 51:12–52:8"
+   },
+   "correction": ""
+  },
+  {
+   "num": 49,
+   "name_en": "Ki Tetze",
+   "name_he": "כִּי תֵצֵא",
+   "name_he_source": "incipit of Deuteronomy 21:10 (Masoretic text)",
+   "book": "Deuteronomy",
+   "from": "21:10",
+   "to": "25:19",
+   "verses": 110,
+   "haftarah": "Isaiah 54:1-17",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 21:10 – 25:19",
+    "haftarah": "Isaiah 54:1-54:17"
+   },
+   "correction": ""
+  },
+  {
+   "num": 50,
+   "name_en": "Ki Tavo",
+   "name_he": "כִּי תָבוֹא",
+   "name_he_source": "KJA-P",
+   "book": "Deuteronomy",
+   "from": "26:1",
+   "to": "29:8",
+   "verses": 122,
+   "haftarah": "Isaiah 60:1-16",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 26:1-29:8",
+    "haftarah": "Isaiah 60:1–60:16"
+   },
+   "correction": ""
+  },
+  {
+   "num": 51,
+   "name_en": "Nitzavim",
+   "name_he": "נִצָּבִים",
+   "name_he_source": "KJA-P",
+   "book": "Deuteronomy",
+   "from": "29:9",
+   "to": "30:20",
+   "verses": 40,
+   "haftarah": "Isaiah 61:10-63:1",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 29:9-30:20",
+    "haftarah": "Isaiah 61:10–63:1"
+   },
+   "correction": ""
+  },
+  {
+   "num": 52,
+   "name_en": "Vayelech",
+   "name_he": "וַיֵּלֶךְ",
+   "name_he_source": "KJA-P",
+   "book": "Deuteronomy",
+   "from": "31:1",
+   "to": "31:30",
+   "verses": 30,
+   "haftarah": "Isaiah 55:6-56:8",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 31:1-30",
+    "haftarah": "Isaiah 55:6-56:8"
+   },
+   "correction": ""
+  },
+  {
+   "num": 53,
+   "name_en": "Haazinu",
+   "name_he": "הַאֲזִינוּ",
+   "name_he_source": "incipit of Deuteronomy 32:1 (Masoretic text)",
+   "book": "Deuteronomy",
+   "from": "32:1",
+   "to": "32:52",
+   "verses": 52,
+   "haftarah": "Hosea 14:2-10",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 32:1-32",
+    "haftarah": "Hosea 14:2–14:10"
+   },
+   "correction": "KJA-A prints 32:1-32; the portion runs to the end of chapter 32 (32:52), before Vezot Haberacha at 33:1."
+  },
+  {
+   "num": 54,
+   "name_en": "Vezot Haberacha",
+   "name_he": "וְזֹאת הַבְּרָכָה",
+   "name_he_source": "KJA-P",
+   "book": "Deuteronomy",
+   "from": "33:1",
+   "to": "34:12",
+   "verses": 41,
+   "haftarah": "Joshua 1:1-10",
+   "haftarah_kale_1733": null,
+   "kja_printed": {
+    "torah": "Deuteronomy 33:1-34:12",
+    "haftarah": "Joshua 1:1-1:10"
+   },
+   "correction": ""
+  }
+ ]
+}

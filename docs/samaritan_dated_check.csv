@@ -1,0 +1,85 @@
+date,sam_month,sam_day,cell_day,listed,model,match,special,cell
+2004-04-24,1,6,5,vayikra,vayikra,True,Wonder of the locusts,5 Parashat: Vayikra el moshe -wonder : Arbe 24- 7:21
+2004-05-01,1,13,12,tsav,tsav,True,Wonder of the darkness,12 Parashat: Tsave Et Aaron -wonder: Hoshech 1 May - 7:21
+2004-05-08,1,20,19,(no portion),(Sabbath of the Feast of Unleavened Bread),True,Sabbath of the Feast of Unleavened Bread,19 Sabbath of the Feast of Matsot 8 - 7:26
+2004-05-15,1,27,26,vayissaaharon,vayissaaharon,True,Sabbath of the Sea,26 Parashat: Va'Yissa Aaron -Sabbath Ha'yam 15- 7:30
+2004-05-22,2,4,4,veish,veish,True,Sabbath of Marah,4 parashat: Ve'iish oh Eisha - Mirra 22 - 6:35
+2004-05-29,2,11,11,acharei,acharei,True,Sabbath of Elim,11 Parashat: Aahore Mot - Eilem 29- 6:39
+2004-06-05,2,18,18,uvekatsirchem,uvekatsirchem,True,Sabbath of the Manna,18 Parasht: Ve'bekatsirchem - Ha'man 5- 6:43
+2004-06-12,2,25,25,moadei,moadei,True,Sabbath of the Rock,25 Parashat: Moadey - Sela 12- 6:47
+2004-06-19,3,2,2,imbechukotai,imbechukotai,True,Sabbath of Amalek,2 Parashat: Eim Be Chukotay - Amalek 19
+2004-06-26,3,9,9,(no portion),(Sabbath of the Commandments (Devarim)),True,Sabbath of the Commandments (Devarim); Sabbath of the Commandments (Devarim),9 Sabbath Devarim 26- 6:51
+2004-07-03,3,16,16,bemidbar,bemidbar,True,,16 Parashat: Be midbar Sinai 3- 6:51
+2004-07-10,3,23,23,naso,naso,True,,23 P arashat: Nasha It Reosh 10 - 6:50
+2004-07-17,4,1,1,daber,daber,True,New Moon (Rosh Chodesh) of the Fourth Month,1- Fourth Month- Rosh Chodesh Parashat: Daber El Aaron 17- 6:48
+2004-07-24,4,8,8,shelach,shelach,True,,8 Parashat: Shalach Lecha A'nashim 24- 6:44
+2004-07-31,4,15,15,vayikach,vayikach,True,,15 Parashat: Va'Yikach Karach 31 - 6:39
+2004-08-07,4,22,22,vayishlach,vayishlach,True,,22 Parashat: Va'Yeshalach Moshe Malachim 7- 6:33
+2004-08-14,4,29,29,pinchas,pinchas,True,,29 Parashat: Pinhas 14- 6:27
+2004-08-21,5,6,6,vayehihamalkoach,vayehihamalkoach,True,,6 Parashat: Va' Yehi Ha Malkach 21 - 6:20
+2004-08-28,5,13,13,eleh,eleh,True,,13 Parashat: Ele Ha'Devarim 28 -6:11
+2004-09-04,5,20,20,reu,reu,True,,20 Parashat: Reu Limadety - Sabbath Tsimmot Suko t 4- 6:02
+2004-09-11,5,27,27,kiyeviacha,kiyeviacha,True,,27 Parashat: Ki Yiviacha 11 -5:52
+2004-10-16,7,3,3,(no portion),(Sabbath of the Selihot),True,Sabbath of the Selihot,3 Sabbath of Selihot 16- 5.09
+2004-10-23,7,10,10,(no portion),(Day of Atonement),True,Day of Atonement,10 Yom Kippur 23- 5.01
+2004-10-30,7,17,17,(no portion),(Sabbath of the Feast of Tabernacles),True,Sabbath of the Feast of Tabernacles,17 Sabbath of the seven days of Succot 30- 4.54
+2004-11-06,7,24,24,bereshit,bereshit + vehaadam,False,,24 Parashat: Bereshit 6- 4.48
+2004-11-13,8,2,1,veyada + vaani,veyada + vaani,True,,1 Parashat: Ve'Yeda Adam+Ve'Ani Hineni 13- 4.42
+2004-11-20,8,9,8,ellibo,ellibo,True,,8 Parashat: El Libo 20- 4.39
+2004-11-27,8,16,15,lechlecha,lechlecha,True,,15 Parashat: Lech Lecha 27- 4.37
+2004-12-04,8,23,22,vayehiavram,vayehiavram,True,,22 Parashat: Va'Yehi Abram 4- 4.36
+2004-12-11,8,30,29,vehashempakad,vehashempakad,True,,29 Parashat: Ve' Hashem Pakad 11- 4.37
+2004-12-18,9,7,7,veavrahamzaken,veavrahamzaken,True,,7 Parashat : Ve'Abraham Zaken 18 -4.39
+2004-12-25,9,14,14,veeletoldot,veeletoldot,True,,14 Parashat : Ve'Elle Toldat Yitschak 25 -4.42
+2005-01-01,9,21,21,vayissa + vayakam,vayissa + vayakam,True,,21 Parashat : Va'Yissa Yaacov +Va'Yakam Yaacov 1 -4.47
+2005-01-08,9,28,28,vatetse + vayeshev,vatetse + vayeshev,True,,28 Parashat : Va'Tetse Dinna+Va'Yeshev Yaacov 8 -4.52
+2005-01-15,10,6,6,veyosefhurad,veyosefhurad,True,,6 Parashat : Ve'Yusef Hurad 15- 4.58
+2005-01-22,10,13,14,veleyosef,veleyosef,True,,14 Parashat : Ve'Le Yosef Yelidu 26- 5.04
+2005-01-29,10,20,21,vayavoyosef + veeleshemot_g,vayavoyosef + veeleshemot_g,True,,21 Parashat Ve'Yavo Yosef+Ve'Ele Shmot 3- 5.11
+2005-02-05,10,27,28,elshaddai + benporat,elshaddai + benporat,True,,28 Parashat: El Shaday+Ben Porat 10- 5.17
+2005-02-12,11,4,4,veeleshemot,veeleshemot,True,,4 Parashat : Ve'Elle Shmot 12 - 5.23
+2005-02-19,11,11,11,kiyedaber,kiyedaber,True,Wonder of the blood,11 Parashat : Ki Yedaber 19 - 5.29
+2005-02-26,11,18,18,hachodesh + vayassa,hachodesh + vayassa,True,Wonder of the frogs,18 Parashat : Ha Hodesh Haze+Ve'Yas'sa Moshe 26 - 5.36
+2005-03-05,11,25,25,bachodesh,bachodesh,True,Wonder of the lice,25 Parashat: Ba'Hodesh Hashlishi 5- 5.41
+2005-03-12,12,3,4,vayikchu,vayikchu,True,Wonder of the swarms,4 Parashat : Va'Yikchu Li Truma 12 - 5.46
+2005-03-19,12,10,11,vezehadavar,vezehadavar,True,Wonder of the pestilence,11 Parashat : Ve'Ze Hadavar 19 - 5.50
+2005-03-26,12,17,18,vayiten,vayiten,True,Wonder of the boils,18 Parashat : Va'Yiten El Moshe 26 - 5.55
+2005-04-02,12,24,25,vayaas,vayaas,True,Wonder of the hail,25 Parashat: Va'Yaas et Hekerashem 5- 6.01
+2006-04-01,1,4,4,vayikra,vayikra,True,Wonder of the locusts,4 Parashat: Yikra El Moshe wonder: A'rbe מופת :ארבה. פרשת : ויקרא אל משה 7:0 0 1- April אפריל
+2006-04-08,1,11,11,tsav,tsav,True,Wonder of the darkness,11 Parashat: Tsave Et Aaron -wonder: Hoshech מופת :חשך. פרשת : צוה את אהרן 8- 7. 05
+2006-04-15,1,18,18,(no portion),(Sabbath of the Feast of Unleavened Bread),True,Sabbath of the Feast of Unleavened Bread,18 Sabbath of the Feast of Matsot שבת מועד חג המצות 15- 7 .09
+2006-04-22,1,25,25,vayissaaharon,vayissaaharon,True,Sabbath of the Sea,25 Parashat: Va'Yissa Aaron -Sabbath Ha'yam שבת :הים. פרשת : וישא אהרן 22- 7 :12
+2006-04-29,2,2,2,veish,veish,True,Sabbath of Marah,2- Parashat: Ve'Eish O' EIsha -Sabbath Marra שבת : מרה. פרשת : ואיש או אשה 29- 7: 19
+2006-05-06,2,9,9,acharei,acharei,True,Sabbath of Elim,9 Parashat: Aahore Mot - Sabbath- Eilem שבת : אילים. פרשת : אחרי מות 6- 7:2 4
+2006-05-13,2,16,16,uvekatsirchem,uvekatsirchem,True,Sabbath of the Manna,16 Parasht: Ve'bekatsirchem sabbath- Ha'man שבת :המן. פרשת : ובקצירכם 13- 7: 29
+2006-05-20,2,23,23,moadei,moadei,True,Sabbath of the Rock,23 Parashat: Moadey -Sabbath- Sela שבת : צור. פרשת : ןבקצרכם 20- 7:3 4
+2006-05-27,3,1,1,imbechukotai,imbechukotai,True,Sabbath of Amalek; New Moon (Rosh Chodesh) of the Third Month,1 The Third Month- Rosh Chodesh ראש החדש השלישי Parashat: .Bechuqotai Sabbath: Amalek שבת :עמלק. פרשת : אם בחקותי 27- 7:38 May מאי
+2006-06-03,3,8,8,(no portion),(Sabbath of the Commandments (Devarim)),True,Sabbath of the Commandments (Devarim); Sabbath of the Commandments (Devarim),8 Sabbath: Devarim שבת הדברים 3- 7:42
+2006-06-10,3,15,15,bemidbar,bemidbar,True,,15 Parashat: Be midbar Sinai פרשת :במדבר סיני 10- 7:46
+2006-06-17,3,22,22,naso,naso,True,,22 P arashat: Nasha It Reosh פרשת : נשא את ראש 17- 7:49
+2006-06-24,3,29,29,daber,daber,True,,29 Parashat: Daber El Aaron פרשת : דבר אל אהרן 24- 7:51
+2006-07-01,4,7,6,shelach,shelach,True,,6 Parashat: Shalach Lecha A'nashim פרשת :שלח לך אנשים 1- 7:51 July יולי
+2006-07-08,4,14,13,vayikach,vayikach,True,,13 Parashat: Va'Yikach Karach פרשת : ויקח קרח 8- 7:50
+2006-07-15,4,21,20,vayishlach,vayishlach,True,,20 Parashat: Va'Yeshalach Moshe Malachim פרשת : וישלח משה מלאכים 15- 7:49
+2006-07-22,4,28,27,pinchas,pinchas,True,,27 Parashat: Pinhas פרשת : פינחס 2 2- 7:45
+2006-07-29,5,5,5,vayehihamalkoach,vayehihamalkoach,True,,5 Parashat: Va'Yehi Ha MalKoach פרשת : ויהי המלקח 29- 7:41
+2006-08-05,5,12,12,eleh,eleh,True,,1 2 Parashat: Ele Hadevarim Sabbath : Massabot שבת המסבות ( חלוקת לוח השנה) פרשת : אלה הדברים 5- 7:36
+2006-08-12,5,19,19,reu,reu,True,,19 Parashat: Reu Limadety Simmot of Succoth שבת צמות הסכות פרשת :ראו למדתי 12- 7:29
+2006-08-19,5,26,26,kiyeviacha,kiyeviacha,True,,26 Parashat: Ki Yiviacha פרשת :כי יביאך 19- 7:22
+2006-08-26,6,3,3,kiatem + banim,kiatem + banim,True,,3 Parashat: Ki Atem + Banim Atem פרשת :כי אתם+ בנים אתם 26- 7:13
+2006-09-02,6,10,10,shoftim,shoftim,True,,1 0 Parashat: Shoftim פרשת : שופטים ושוטרים 2- 7:05
+2006-09-09,6,17,17,kiyikach,kiyikach,True,,17 Parashat: Ki Yikach Eish פרשת : כי יקח איש אשה 9- 7:00
+2006-09-16,6,24,24,hayom,hayom,True,,24 Parashat: Hayom Haze פרשת : היום הזה 16- 7:36
+2006-09-23,7,2,2,(no portion),(Sabbath of the Selihot),True,Sabbath of the Selihot,2 Sabbath of Selihot שבת עשרת יומי הסליחות Jewish- Rosh Hasshana 23- 6:37 ' י- ראש השנה א
+2006-09-30,7,9,9,vehaya,vehaya,True,,9 Parashat: Ve' Haya Ki Yavou פרשת : והיה כי יבאו 30- 5:28
+2006-10-07,7,16,16,(no portion),(Sabbath of the Feast of Tabernacles),True,Sabbath of the Feast of Tabernacles,16 Sabbath of The Seven Days of Succoth שבת מועד חג הסכות 7- 5 :19 י- חג הסוכות
+2006-10-14,7,23,23,bereshit,bereshit,True,,2 3 Parashat: B ereshit פרשת : בראשית 14- 5:11 י-שמחת תורה
+2006-10-21,7,30,30,vehaadam + veyada,vehaadam + veyada,True,,30 Parashat: Ve'Hadam Yada+Ve'Yeda Adam פרשת : והאדם ידע + וידע אדם 21- 5:03
+2006-10-28,8,7,7,vaani,vaani,True,,7 Parashat- Ve'Ani Hineni פרשת : ואני הנני 28 - 4:56
+2006-11-04,8,14,14,ellibo,ellibo,True,,14 Parashat: El Libo פרשת : אל לבו 4- 4:49
+2006-11-11,8,21,21,lechlecha,lechlecha,True,,21 Parashat: Lech Lecha פרשת :לך לך 11- 4:44
+2006-11-18,8,28,28,vayehiavram,vayehiavram,True,,28 Parashat: Va'Yehi Abram פרשת : ויהי אברם 18- 4:40
+2006-11-25,9,5,5,vehashempakad,vehashempakad,True,,5 Parashat: Ve' Hashem Pakad פרשת : ויהוה פקד את שרה 25 - 4:37
+2006-12-02,9,12,12,veavrahamzaken,veavrahamzaken,True,,12 Parashat: Ve'Abraham Zaken פרשת : ואברהם זקן 2 - 4:36
+2006-12-09,9,19,19,veeletoldot,veeletoldot,True,,19 Parashat: Ve'Elle Toldat Yitschak פרשת : ואלה תולדת יצחק 9- 4:37
+2006-12-16,9,26,26,vayissa,vayissa,True,,26 Parashat: Va'Yisa Yaacov פרשת : וישא יעקב 16- 4:38

@@ -215,7 +215,7 @@ class SamaritanView:
     short = "Samaritan"
     israel = True
 
-    def __init__(self, rule: str = "sunset", april8_floor: bool = False):
+    def __init__(self, rule: str = "afternoon", april8_floor: bool = False):
         self.cal = sc.SamaritanCalendar(april8_floor, rule)
         self.omer = False
 
@@ -235,7 +235,7 @@ class SamaritanView:
 
     def _info(self, m: sc.SamMonth) -> MonthInfo:
         la = sc.apparent_local(m.conj_utc)
-        rule = "apparent noon" if self.cal.rule == "noon" else "sunset"
+        rule = {"noon": "apparent noon", "afternoon": "15:00 sundial time"}.get(self.cal.rule, "sunset")
         note = (f"True new moon (JPL DE440s) {m.conj_utc:%a %d %b %Y, %H:%M} UT = {la:%H:%M} sundial time at Mount "
                 f"Gerizim; the month's first day is the day containing it (day boundary: {rule})")
         return MonthInfo(m.year, m.month, m.name, m.name_he, m.start, m.length, m.leap, note)

@@ -22,6 +22,7 @@ import sky_layer as sl
 import theme
 import hebrew_names as hn
 import holiday_history as hh
+import readings as rdg
 from hebrew_names import bi, bt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -111,11 +112,56 @@ def card(title: str, body: str) -> str:
 # ----------------------------------------------------------------------------------------------
 # Today
 # ----------------------------------------------------------------------------------------------
+def portion_name(view, d):
+    """(English, Hebrew) name of the Shabbat reading in the view's tradition; None if none."""
+    if d.weekday() != 5:
+        return None
+    if view.kind == cv.FIXED:
+        return view.parsha(d)
+    rd = rdg.reading_for(view, d)
+    return (rd.get("name_en", ""), rd.get("name_he", "")) if rd else None
+
+
+TODAY_TABS = {"day": "Today · היום", "reading": "Torah reading · קריאת התורה"}
+
+
+def render_reading(ctx, today):
+    view = ctx["view"]
+    if not rdg.available(view):
+        st.info("Torah readings are not installed for this calendar yet.")
+        return
+    sats = rdg.shabbatot(today - timedelta(days=28), 16)
+    this_sat = rdg.shabbatot(today, 1)[0]
+    sats = [s for s in sats if view.covers(s)]
+    if not sats:
+        st.info("This date is outside the range of the calendar.")
+        return
+
+    def lab(s):
+        h = view.hdate(s)
+        p = portion_name(view, s)
+        return (f"{s:%a %d %b %Y}" + (" (this Shabbat)" if s == this_sat else "")
+                + (f" — {p[0]}" if p and p[0] else "") + (f" · {h.day} {h.month_name}" if h else ""))
+
+    s = st.selectbox("Shabbat · שבת", sats, index=sats.index(this_sat) if this_sat in sats else 0,
+                     format_func=lab, key=f"read_sat_{view.short}")
+    rd = rdg.reading_for(view, s)
+    if rd is None:
+        st.info("No reading is available for this Shabbat in this calendar.")
+        return
+    st.html(card(f"Torah reading · קריאת התורה — {view.kind}", rdg.render_html(rd, phone=device.phone())))
+
+
 def render_today(ctx):
     place, view = ctx["place"], ctx["view"]
     tz = ZoneInfo(place["tz"])
     now = datetime.now(tz)
     today = now.date()
+    tab = st.radio("Show · הצג", list(TODAY_TABS), format_func=lambda k: TODAY_TABS[k], horizontal=True,
+                   key="today_tab", label_visibility="collapsed")
+    if tab == "reading":
+        render_reading(ctx, today)
+        return
     fixed, obs, pre = ctx["fixed"], ctx["observed"], ctx["pretemple"]
     have_sky = sky_ok()
     z = zmanim(place["lat"], place["lon"], place["tz"], today - timedelta(days=2), today + timedelta(days=8),
@@ -166,13 +212,17 @@ def render_today(ctx):
                 sat = today + timedelta(days=(5 - today.weekday()) % 7)
             fri = sat - timedelta(days=1)
             zf, zs = z.get(fri, {}), z.get(sat, {})
-            parsha = fixed.parsha(sat)
+            parsha = portion_name(view, sat) if view.kind != cv.FIXED else fixed.parsha(sat)
             body = (f"<div>{bt('candle lighting').capitalize()} Friday {fri:%d %b}: <b>{t12(zf.get('candle_lighting'))}</b> "
                     f"<span class='sl-muted'>({ctx['candle']} min before sunset {t12(zf.get('sunset'))})</span></div>"
                     f"<div>{bt('Shabbat')} ends ({bt('Havdalah')}) {sat:%d %b}: <b>{t12(zs.get('nightfall'))}</b></div>")
             if parsha and parsha[0]:
+                who = ({True: "Israel", False: "diaspora"}[fixed.israel] if view.kind == cv.FIXED
+                       else rdg.TRADITION_LABEL.get((rdg.reading_for(view, sat) or {}).get("tradition"), ("",))[0])
                 body += (f"<div>{bt('Torah portion')}: <b>{bi(parsha[0], parsha[1])}</b> "
-                         f"<span class='sl-muted'>({'Israel' if fixed.israel else 'diaspora'} reading)</span></div>")
+                         f"<span class='sl-muted'>({esc(who)} reading)</span></div>"
+                         "<div class='sl-muted'>Choose <b>Torah reading · קריאת התורה</b> at the top of the page "
+                         "for the full text.</div>")
             elif parsha is not None:
                 body += "<div>A festival Shabbat: festival reading instead of the weekly portion.</div>"
             st.html(card("This Shabbat · שבת", body))
@@ -282,7 +332,7 @@ def render_month(ctx):
         if d.weekday() == 5:
             if z.get(d):
                 out.append(f"<span class='sl-line'>Ends <b>{t12(z[d]['nightfall'])}</b></span>")
-            p = view.parsha(d)
+            p = portion_name(view, d)
             if p and p[0]:
                 out.append(f"<span class='sl-line'><b>{bi(p[0], p[1])}</b></span>")
         mi = moon.get(d)
@@ -343,7 +393,7 @@ def render_month(ctx):
         if mo is not None:
             body += f"<div>In your time zone: <b>{mo.conj_utc.astimezone(tz):%A %d %b %Y, %H:%M}</b>.</div>"
         body += ("<div class='sl-muted'>The Samaritan priests calculate the calendar; the full method is kept within the "
-                 "priestly family. This reconstruction reproduces the 14 published community dates checked (2001–2026). "
+                 "priestly family. This reconstruction reproduces all 34 published community dates checked (2001–2026). "
                  "Months are named by number (the First Month is in spring), and the year number advances at the "
                  "Sixth Month, the month of the entry into Canaan in Samaritan tradition.</div>")
         st.html(card("How this month began · חשבון החדש", body))
@@ -764,7 +814,7 @@ def render_traditions(ctx):
     st.html(card("Notes and sources · מקורות", (
         "<p>Samaritan calendar: calculated by the priests and published twice a year; reconstruction after "
         "Reingold &amp; Dershowitz, <i>Calendrical Calculations</i> (4th ed. 2018), calibrated here to published "
-        "community dates (sunset day boundary at Mount Gerizim). Karaite calendar: crescent and barley (aviv) as "
+        "community dates (a 15:00 sundial-time cut-off at Mount Gerizim). Karaite calendar: crescent and barley (aviv) as "
         "observed in the Land of Israel; the barley is modelled by the spring equinox. Festival-day customs: "
         "Orthodox and most Conservative congregations outside Israel keep second days; Reform and most "
         "Reconstructionist congregations keep one. Beta Israel: Sigd, 29 Marcheshvan, Israeli state holiday since "

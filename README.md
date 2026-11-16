@@ -8,6 +8,7 @@ Five calendars of the Jewish and Samaritan traditions (**fixed, observed, Early 
 - **Karaite · לוח הקראים:** months from the sighted crescent (the observed calendar's chain), the barley (aviv) year modelled by the spring equinox, biblical festivals one day each, Shavuot always on a Sunday, and the Karaite fasts.
 - **Samaritan · לוח השומרונים:** months from the true new moon at Mount Gerizim (sunset day boundary), the First Month after 11 March (Julian), and the year number advancing at the Sixth Month. It matches 14 of 14 published community dates from 2001 to 2026 (see docs/VALIDATION.md).
 - **Traditions · זרמים:** a diagram of the branches of Judaism with the calendar and festival-day custom of each, and buttons that switch to it. The fixed calendar adds a one-day-everywhere (Reform) scheme and Sigd, the Beta Israel festival.
+- **Torah reading · קריאת התורה:** on the Today page, the full Shabbat reading in Hebrew and English. Each calendar uses its own tradition: the rabbinic annual cycle, the ancient triennial cycle, the Karaite portions, or the Samaritan portions read from the Samaritan Pentateuch.
 - **Finds your location** automatically (asks the browser once) and gives **a short history of every holiday** when you click its name.
 - **Pages:** Today, Month, Year & holidays (with .ics and .csv downloads), Compare, Cycles, How it works.
 - **Design:** proper nouns also appear in Hebrew letters, and the look follows First Temple period art.
@@ -35,4 +36,4 @@ The Paleo-Hebrew font is Noto Sans Phoenician, © The Noto Project Authors, unde
 
 ## License
 
-Sky Luach is released under the [MIT License](LICENSE), © 2026 Gerad Smith. Bundled third-party material keeps its own terms; see [THIRD_PARTY.md](THIRD_PARTY.md). These include the Noto Sans Phoenician font (SIL Open Font License, `assets/NotoSansPhoenician_OFL.txt`), the NASA JPL DE440s ephemeris, and the GeoNames town list (CC BY 4.0).
+Sky Luach is released under the [MIT License](LICENSE), © 2026 Gerad Smith. Bundled third-party material keeps its own terms; see [THIRD_PARTY.md](THIRD_PARTY.md). This includes the Torah texts for the Shabbat readings: the Masoretic text and JPS 1917 translation (public domain), and the Samaritan Pentateuch of Florentin & Tal (CC BY-NC 4.0, non-commercial). These include the Noto Sans Phoenician font (SIL Open Font License, `assets/NotoSansPhoenician_OFL.txt`), the NASA JPL DE440s ephemeris, and the GeoNames town list (CC BY 4.0).

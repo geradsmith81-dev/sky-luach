@@ -20,6 +20,7 @@ import hebrew_names as hn  # noqa: E402
 import observed_calendar as oc  # noqa: E402
 import pretemple_calendar as ptc  # noqa: E402
 import samaritan_calendar as smc  # noqa: E402
+import readings as rdg  # noqa: E402
 import pages  # noqa: E402
 import locator  # noqa: E402
 import places  # noqa: E402
@@ -188,6 +189,15 @@ with panel:
     pt_rule = st.selectbox("Leap month", list(ptc.LEAP_RULES), key="pt_rule", format_func=lambda k: ptc.LEAP_RULES[k],
                            help="Months always begin at the true new moon. This only decides which years get a "
                                 "second Adar.")
+
+    st.subheader("Ancient Torah reading cycle · המחזור התלת-שנתי")
+    st.caption("Used by the Observed and Early Temple Period calendars: a reconstruction of the triennial cycle read "
+               "in the Land of Israel in late antiquity (Talmud, Megillah 29b). Scholars disagree on both points below.")
+    tri_start = st.selectbox("Cycle begins", ["nisan", "tishrei"], key="tri_start",
+                             format_func=lambda k: {"nisan": "In Nisan (spring)", "tishrei": "In Tishrei (autumn)"}[k])
+    tri_len = st.selectbox("Length of the cycle", ["3", "3.5"], key="tri_len",
+                           format_func=lambda k: {"3": "Three years", "3.5": "Three and a half years (two per Sabbatical cycle)"}[k])
+    rdg.TRIENNIAL_OPTS.update(start=tri_start, length=tri_len)
 
     st.subheader("Samaritan · לוח השומרונים")
     sam_rule = st.selectbox("Which day begins the month", list(smc.RULES), key="sam_rule",

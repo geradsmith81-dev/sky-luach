@@ -5,15 +5,16 @@ The Samaritan priestly family computes the calendar ("Ishban Kashta", the true c
 method is kept within that family. This module follows the published reconstruction of
 E. M. Reingold & N. Dershowitz, *Calendrical Calculations* (4th ed., 2018), "modern calculation":
 
-* A month begins on the day of the true (geocentric) conjunction of Sun and Moon. Two versions of the
+* A month begins on the day of the true (geocentric) conjunction of Sun and Moon. Three versions of the
   day rule are offered:
-    'sunset' (default): the Samaritan day (sunset to sunset at Mount Gerizim) that contains the
-             conjunction is day 1. This is this app's calibration against published community dates
-             (see Validation below); it is not a published Samaritan rule.
-    'noon':  Reingold & Dershowitz's published rule - the day of the conjunction if it falls at or
-             before apparent noon at Mount Gerizim (32.1994 N, 35.2728 E), else the following day.
-             It misses 5 of the 14 dates: the 14th is a day late in 2016, 2025 and 2026 (and the 2026
-             pilgrimage with it), and in 2025 that pushes Shavuot a full week late (8 June for 1 June).
+    'afternoon' (default): the day of the conjunction if it falls by 15:00 sundial (apparent solar) time
+             at Mount Gerizim (32.1994 N, 35.2728 E), the "ninth hour"; otherwise the next day. This is the
+             app's calibration against published community dates (see Validation below), not a published
+             Samaritan rule: the dates require a cut-off between 14:17 and 15:42 sundial time, and 15:00 lies
+             inside that window.
+    'sunset':  the Samaritan day (sunset to sunset) that contains the conjunction is day 1 (31 of 34).
+    'noon':    Reingold & Dershowitz's published rule - the day of the conjunction if it falls at or before
+             apparent noon, else the following day (25 of 34).
 * The First Month (Abib) is the first month whose conjunction falls after noon of 11 March in the
   Julian calendar (24 March Gregorian in 1900-2099). A thirteenth month is added before it when needed.
 * Optional (off by default): a "Passover sacrifice never before 8 April" floor, sometimes quoted for the
@@ -21,16 +22,16 @@ E. M. Reingold & N. Dershowitz, *Calendrical Calculations* (4th ed., 2018), "mod
   years 1850-2150 and contradicts a published date (the Sixth Month of 3640 began 19 Aug 2001),
   so it is off by default.
 
-Validation (sunset rule, no floor): 14 of 14 published community dates - 14th of the First Month
-2016-04-20, 2017-04-10, 2018-04-29, 2019-04-18, 2020-05-06, 2024-04-22, 2025-04-11, 2026-04-30;
-closing pilgrimage (21st) 2026-05-07; Shavuot 2017-06-04, 2025-06-01; Sixth Month 2001-08-19 and
-2026-09-11; Seventh Month 2026-10-11. The noon rule gives 9 of 14. (In 2026 the sacrifice ceremony
-itself was brought forward to 10 April because of the war; the calendar date was 30 April.)
-* Years are counted from the entry into Canaan; the year number advances at the Sixth Month
-  (year 3640 began 19 Aug 2001; year 3656 in 2017).
-
-Conjunctions come from NASA JPL DE440s (stored in data/crescents_jerusalem.csv.gz); apparent noon uses
-the NOAA equation-of-time formula (accurate to well under a minute).
+Validation (afternoon rule, no floor): 34 of 34 published community dates.
+* 14 festival and month dates 2001-2026: 14th of the First Month 2016-04-20, 2017-04-10, 2018-04-29,
+  2019-04-18, 2020-05-06, 2024-04-22, 2025-04-11, 2026-04-30; closing pilgrimage (21st) 2026-05-07;
+  Shavuot 2017-06-04, 2025-06-01; Sixth Month 2001-08-19 and 2026-09-11; Seventh Month 2026-10-11.
+  (In 2026 the sacrifice ceremony itself was brought forward to 10 April because of the war; the calendar
+  date was 30 April.)
+* 20 month starts from the community's monthly calendars, Apr 2004 - Dec 2006 (Internet Archive copies of
+  the-samaritans.com); see docs/samaritan_month_starts_check.csv.
+The sunset rule gives 31 of 34 (one day early in Apr 2004, Nov 2004 and Jun 2006, when the conjunction fell
+at 15:43, 17:03 and 18:24 sundial time); the noon rule gives 25 of 34.
 """
 from __future__ import annotations
 
@@ -82,18 +83,21 @@ def sunset_apparent_hours(d: date) -> float:
 
 
 RULES = {
-    "sunset": "The Samaritan day (sunset to sunset) that contains the conjunction is day 1 "
-              "(matches all 14 published dates checked, 2001-2026)",
+    "afternoon": "Day of the conjunction if it falls by 15:00 sundial time at Mount Gerizim (the ninth hour), else the next "
+                 "day (matches all 34 published community dates checked, 2001-2026)",
+    "sunset": "The Samaritan day (sunset to sunset) that contains the conjunction is day 1 (matches 31 of 34)",
     "noon": "Reingold & Dershowitz: day of the conjunction if at or before apparent noon, else the next day "
-            "(matches 9 of 14)",
+            "(matches 25 of 34)",
 }
 
 
-def month_start_for_conjunction(t_utc: datetime, rule: str = "sunset") -> date:
+def month_start_for_conjunction(t_utc: datetime, rule: str = "afternoon") -> date:
     """First day of the month (Gregorian daytime date) for a conjunction at t_utc."""
     la = apparent_local(t_utc)
     h = la.hour + la.minute / 60 + la.second / 3600
-    cut = 12.0 if rule == "noon" else sunset_apparent_hours(la.date())
+    cut = {"noon": 12.0, "afternoon": 15.0}.get(rule)
+    if cut is None:
+        cut = sunset_apparent_hours(la.date())
     return la.date() if h <= cut else la.date() + timedelta(days=1)
 
 
@@ -140,7 +144,7 @@ def conjunctions() -> list[datetime]:
 
 
 @lru_cache(maxsize=8)
-def calendar(april8_floor: bool = False, rule: str = "sunset") -> list[SamMonth]:
+def calendar(april8_floor: bool = False, rule: str = "afternoon") -> list[SamMonth]:
     conj = conjunctions()
     starts = [month_start_for_conjunction(c, rule) for c in conj]
     first_months = []
@@ -181,7 +185,7 @@ def _shavuot(first_15: date) -> date:
 class SamaritanCalendar:
     """Interface parallel to ObservedCalendar, for the pages."""
 
-    def __init__(self, april8_floor: bool = False, rule: str = "sunset"):
+    def __init__(self, april8_floor: bool = False, rule: str = "afternoon"):
         self.april8_floor, self.rule = april8_floor, rule
         self.months = calendar(april8_floor, rule)
         self._starts = [m.start for m in self.months]

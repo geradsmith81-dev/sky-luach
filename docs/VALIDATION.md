@@ -70,32 +70,54 @@ Twelve evenings were sampled evenly from 1850 to 2150. At each crescent "best ti
 
 ## 3d. Samaritan calendar — checked against published community dates
 
-The default rule is the sunset day boundary at Mount Gerizim, with no 8 April floor.
+The default rule: the month begins on the day of the true new moon if it falls by 15:00 sundial time at Mount Gerizim, otherwise the next day. There is no 8 April floor.
 
-| Published date | Event | Sunset rule | Noon rule (Reingold & Dershowitz) |
-|---|---|---|---|
-| 2001-08-19 | first day of the Sixth Month (year 3640 begins) | ✓ | ✓ |
-| 2016-04-20 | 14th of the First Month (Passover sacrifice) | ✓ | +1 day |
-| 2017-04-10 | 14th of the First Month | ✓ | ✓ |
-| 2017-06-04 | Shavuot | ✓ | ✓ |
-| 2018-04-29 | 14th of the First Month | ✓ | ✓ |
-| 2019-04-18 | 14th of the First Month | ✓ | ✓ |
-| 2020-05-06 | 14th of the First Month | ✓ | ✓ |
-| 2024-04-22 | 14th of the First Month | ✓ | ✓ |
-| 2025-04-11 | 14th of the First Month | ✓ | +1 day |
-| 2025-06-01 | Shavuot | ✓ | +7 days |
-| 2026-04-30 | 14th of the First Month (the 2026 ceremony was brought forward to 10 April because of the war) | ✓ | +1 day |
-| 2026-05-07 | 21st, closing pilgrimage | ✓ | +1 day |
-| 2026-09-11 | first day of the Sixth Month | ✓ | ✓ |
-| 2026-10-11 | Feast of the Seventh Month | ✓ | ✓ |
+| Published date | Event | 15:00 rule (default) | Sunset rule | Noon rule (Reingold & Dershowitz) |
+|---|---|---|---|---|
+| 2001-08-19 | first day of the Sixth Month (year 3640 begins) | ✓ | ✓ | ✓ |
+| 2016-04-20 | 14th of the First Month (Passover sacrifice) | ✓ | ✓ | +1 day |
+| 2017-04-10 | 14th of the First Month | ✓ | ✓ | ✓ |
+| 2017-06-04 | Shavuot | ✓ | ✓ | ✓ |
+| 2018-04-29 | 14th of the First Month | ✓ | ✓ | ✓ |
+| 2019-04-18 | 14th of the First Month | ✓ | ✓ | ✓ |
+| 2020-05-06 | 14th of the First Month | ✓ | ✓ | ✓ |
+| 2024-04-22 | 14th of the First Month | ✓ | ✓ | ✓ |
+| 2025-04-11 | 14th of the First Month | ✓ | ✓ | +1 day |
+| 2025-06-01 | Shavuot | ✓ | ✓ | +7 days |
+| 2026-04-30 | 14th of the First Month (the 2026 ceremony was brought forward to 10 April because of the war) | ✓ | ✓ | +1 day |
+| 2026-05-07 | 21st, closing pilgrimage | ✓ | ✓ | +1 day |
+| 2026-09-11 | first day of the Sixth Month | ✓ | ✓ | ✓ |
+| 2026-10-11 | Feast of the Seventh Month | ✓ | ✓ | ✓ |
+| 2004–2006 | 20 month starts from the community's monthly calendars (`docs/samaritan_month_starts_check.csv`) | 20 of 20 | 17 of 20 | 16 of 20 |
 
-- Sunset rule: 14 of 14. Noon rule: 9 of 14.
-- The data pin the cut-off between 13:42 and 20:40 sundial time. The conjunctions of 7 Apr 2016 (13:42) and 29 Mar 2025 (13:13) counted for their own day, and that of 8 Apr 2024 (20:40) did not. Sunset, about 18:15 in spring, lies inside that window and is the natural Samaritan day boundary. It is a calibration, not a published Samaritan rule.
+- Totals: 15:00 rule 34 of 34; sunset rule 31 of 34; noon rule 25 of 34.
+- The dated evidence pins the cut-off between 14:17 and 15:42 sundial time.
+  - The conjunctions of 29 Mar 2025 (13:13) and 7 Apr 2016 (13:42) counted for their own day.
+  - Those of 19 Apr 2004 (15:43), 12 Nov 2004 (17:03) and 25 Jun 2006 (18:24) did not.
+  - 15:00, the "ninth hour", lies inside the window. It is a calibration, not a published Samaritan rule; the priests keep the method within the priestly family.
 - The 8 April floor would move the First Month in 10 of the years 1850–2150, including 2001, where it contradicts the published start of the Sixth Month.
-- 2013 is left out: a press report (23 April) agrees with the model, but a dated photograph suggests 22 April, which no conjunction rule allows.
-- Structure, 1850–2150: 298 festival cycles, 110 with a thirteenth month. Months are 29 or 30 days. Shavuot is always a Sunday. The 14th of the First Month falls between 6 April and 6 May.
+- 2013 is left out. A press report (23 April) agrees with the model, but a dated photograph suggests 22 April, which no conjunction rule allows.
+- Structure, 1850–2150: 298 festival cycles, 110 with a thirteenth month. Months are 29 or 30 days, and Shavuot is always a Sunday.
+
+## 3e. Shabbat Torah readings — checks
+
+Full reports: `docs/Rabbinic_VALIDATION.md`, `docs/Karaite_VALIDATION.md`, `docs/Samaritan_VALIDATION.md`.
+
+| Calendar | Reading | Checked against | Result |
+|---|---|---|---|
+| Fixed (rabbinic) | Annual cycle: portion, aliyot, maftir, Ashkenazi and Sephardi haftarot, special Shabbatot | hebcal-leyning 10.1 run for every Shabbat 1850–2149, Israel and diaspora | 31,306 of 31,306 identical; portion names also identical to pyluach |
+| Observed, Early Temple | Ancient Land-of-Israel triennial cycle, 154 sedarim (or the 167 of the Leningrad Codex) | Internal checks only (every seder read once per cycle, in order) | Model: start month and cycle length are scholarly reconstructions; no haftarot |
+| Karaite | Karaite Jews of America portions and haftarot | Sourced anchors over 297 years: Bereshit after 22 Tishrei; Naso before the Sunday Shavuot; mourning portions 9 Tammuz–10 Av | 0 anchor failures; no dated Karaite schedule was found, so week-by-week dates are a model |
+| Samaritan | Community's 54 Sabbath portions, Samaritan Pentateuch text | 84 dated Sabbaths from the community's 2004–2006 monthly calendars | 83 of 84; some joins in leap-year winters are model choices |
+
+Texts:
+- **Masoretic text:** Westminster Leningrad Codex (public domain) with JPS 1917 English (public domain). It has 5,847 verses in standard Jewish numbering, each with Hebrew and English.
+- **Samaritan Pentateuch:** Florentin & Tal 2024 (CC BY-NC 4.0), from MS Nablus 6. It has 5,954 verses, unpointed as in the manuscript, and 16 of 16 hand-checked verses are correct.
 
 ## 4. What is *not* validated
+
+- Karaite weekly reading dates (no published dated Karaite schedule was found) and Karaite and Samaritan festival-Sabbath readings, which are not shown.
+- The triennial cycle schedule, a reconstruction.
 
 - Karaite years in which the barley inspection differs from the equinox stand-in.
 - Samaritan dates before 2001 and after 2026 rest on the calibrated rule alone.

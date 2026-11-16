@@ -114,6 +114,16 @@ h1, h2, h3, h4 {{ font-family: {SERIF}; color: {GOLD}; }}
 .sl-list td.sl-sat {{ background: {SHABBAT_BG}; }}
 .sl-list td.sl-today {{ outline: 2px solid {GOLD}; }}
 .sl-legend span {{ margin-right: 6px; }}
+.sl-read {{ border-top: 1px solid rgba(184,131,74,.45); margin: .2rem 0 .8rem 0; }}
+.sl-vrow {{ display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; padding: .42rem 0;
+           border-bottom: 1px solid rgba(184,131,74,.22); }}
+.sl-ven {{ color: {TEXT}; font-family: {SERIF}; font-size: 1rem; line-height: 1.5; }}
+.sl-vhe {{ color: {TEXT}; font-family: {HEB}; font-size: 1.32rem; line-height: 1.75; text-align: right; }}
+.sl-vnum {{ color: {GOLD}; font-weight: 700; font-size: .82rem; margin-right: .25rem; }}
+.sl-read-ref {{ color: {GOLD}; font-family: {SERIF}; font-weight: 700; margin-top: .7rem; }}
+.sl-read-phone .sl-vrow {{ grid-template-columns: 1fr; gap: .25rem; }}
+.sl-read-phone .sl-vhe {{ order: -1; }}
+@media (max-width: 700px) {{ .sl-vrow {{ grid-template-columns: 1fr; gap: .25rem; }} .sl-vhe {{ order: -1; }} }}
 .sl-table {{ width: 100%; border-collapse: collapse; font-size: .93rem; }}
 .sl-table th {{ font-family: {SERIF}; color: {GOLD}; text-align: left; border-bottom: 2px solid {BRONZE}; padding: 5px 6px; }}
 .sl-table td {{ color: {TEXT}; border-bottom: 1px solid rgba(184,131,74,.35); padding: 5px 6px; vertical-align: top; }}
