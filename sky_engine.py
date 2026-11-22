@@ -36,17 +36,26 @@ class EphemerisMissing(RuntimeError):
 @lru_cache(maxsize=1)
 def load():
     """Return (timescale, ephemeris, filename). Prefers de440.bsp if present, else de440s.bsp,
-    downloading de440s.bsp from JPL if neither file is there."""
-    os.makedirs(EPHEM_DIR, exist_ok=True)
-    loader = Loader(EPHEM_DIR, verbose=False)
-    ts = loader.timescale(builtin=True)
-    for name in ("de440.bsp", "de440s.bsp"):
-        if os.path.exists(os.path.join(EPHEM_DIR, name)):
-            return ts, loader(name), name
+    downloading de440s.bsp from JPL if neither file is there.
+
+    The files shipped in ephem/ are used first. On the desktop copy a download (only needed if the
+    shipped file is missing) goes to the per-user folder that tools/launch.py names in
+    SKYLUACH_EPHEM_CACHE (%LOCALAPPDATA%\\SkyLuach\\cache\\ephem), never into the program folder.
+    The hosted copy has no such variable and downloads into ephem/ as before."""
+    cache = os.environ.get("SKYLUACH_EPHEM_CACHE") or ""
+    folders = [EPHEM_DIR] + ([cache] if cache else [])
+    for folder in folders:
+        for name in ("de440.bsp", "de440s.bsp"):
+            if os.path.exists(os.path.join(folder, name)):
+                loader = Loader(folder, verbose=False)
+                return loader.timescale(builtin=True), loader(name), name
+    target = cache or EPHEM_DIR
     try:
+        os.makedirs(target, exist_ok=True)
+        loader = Loader(target, verbose=False)
         url = "https://ssd.jpl.nasa.gov/ftp/eph/planets/bsp/de440s.bsp"
         loader.download(url, filename="de440s.bsp")
-        return ts, loader("de440s.bsp"), "de440s.bsp"
+        return loader.timescale(builtin=True), loader("de440s.bsp"), "de440s.bsp"
     except Exception as exc:  # pragma: no cover - network failure
         raise EphemerisMissing(
             "The JPL ephemeris file de440s.bsp is missing and could not be downloaded "

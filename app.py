@@ -14,6 +14,10 @@ import streamlit as st  # noqa: E402
 st.set_page_config(page_title="Sky Luach · לוח השמים", page_icon=os.path.join(HERE, "assets", "luach_icon.png"),
                    layout="wide", initial_sidebar_state="auto")
 
+import desktop as dk  # noqa: E402  (desktop-only controls; inert on the hosted copy)
+
+dk.require_password(st)
+
 import calendars as cv  # noqa: E402
 import device  # noqa: E402
 import hebrew_names as hn  # noqa: E402
@@ -224,3 +228,5 @@ st.html("<div class='sl-frieze' role='presentation' style='margin-top:1.2rem'></
         "<div class='sl-muted' style='font-size:.8rem'>Astronomy: NASA JPL DE440s via Skyfield. "
         "The observed, Karaite and Samaritan calendars are modelled reconstructions, not rulings for practice; "
         "follow your community's published calendar.</div>")
+
+dk.desktop_controls(st)

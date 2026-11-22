@@ -1,8 +1,13 @@
 [server]
+fileWatcherType = "none"
+runOnSave = false
 headless = true
 
 [browser]
 gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"
 
 # Sky Luach is always dark (cedar and ivory); the same colours are given for the light slot so phones in light mode stay dark.
 [theme]
