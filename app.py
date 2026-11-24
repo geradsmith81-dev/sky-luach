@@ -45,13 +45,13 @@ PAGES = {
 
 
 @st.cache_resource(show_spinner="Building the observed calendar from the Jerusalem crescent table…", max_entries=12)
-def observed_view(crit, eq, nd, omer):
-    return cv.ObservedView(crit, eq, nd, omer)
+def observed_view(crit, eq, nd, omer, hillula=True):
+    return cv.ObservedView(crit, eq, nd, omer, hillula)
 
 
 @st.cache_resource(show_spinner="Building the Early Temple Period calendar from the true new moons…", max_entries=12)
-def pretemple_view(rule, eq, nd, omer):
-    return cv.PreTempleView(rule, eq, nd, omer)
+def pretemple_view(rule, eq, nd, omer, hillula=True):
+    return cv.PreTempleView(rule, eq, nd, omer, hillula)
 
 
 @st.cache_resource(show_spinner="Building the Karaite calendar from the Jerusalem crescent table…", max_entries=12)
@@ -174,6 +174,10 @@ with panel:
                              key=f"candle_{place['name']}",
                              help="18 minutes is the common custom; Jerusalem custom is 40.")
     modern = st.toggle("Show Israeli national days", value=True, key="modern")
+    hillula = st.toggle("Show hillula days · ימי הילולא", value=True, key="hillula",
+                        help="Anniversaries of the passing of great tzaddikim, from Moses and Rabbi Shimon bar Yochai to "
+                             "the Baba Sali. Click one for a short history. Shown in the fixed, observed and Early "
+                             "Temple calendars.")
     sigd = st.toggle("Show Sigd · סיגד (Beta Israel; Israeli state holiday)", value=True, key="sigd")
     omer = st.toggle("Show the Omer count · ספירת העומר", value=False, key="omer")
 
@@ -213,9 +217,9 @@ with panel:
 ctx = {
     "place": place, "candle": int(candle), "crit": crit, "eq": eq, "nisan_day": int(nisan_day), "pt_rule": pt_rule,
     "scheme": scheme, "scheme_key": f"scheme_{place['name']}",
-    "fixed": cv.FixedView(israel, modern, omer, scheme=scheme, sigd=sigd),
-    "observed": observed_view(crit, eq, int(nisan_day), omer),
-    "pretemple": pretemple_view(pt_rule, eq, int(nisan_day), omer),
+    "fixed": cv.FixedView(israel, modern, omer, scheme=scheme, sigd=sigd, hillula=hillula),
+    "observed": observed_view(crit, eq, int(nisan_day), omer, hillula),
+    "pretemple": pretemple_view(pt_rule, eq, int(nisan_day), omer, hillula),
     "karaite": karaite_view(crit, eq, int(nisan_day), omer),
     "samaritan": samaritan_view(sam_rule, bool(sam_floor)),
 }

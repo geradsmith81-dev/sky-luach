@@ -9,6 +9,7 @@ Five calendars of the Jewish and Samaritan traditions (**fixed, observed, Early 
 - **Samaritan · לוח השומרונים:** months from the true new moon at Mount Gerizim (sunset day boundary), the First Month after 11 March (Julian), and the year number advancing at the Sixth Month. It matches 14 of 14 published community dates from 2001 to 2026 (see docs/VALIDATION.md).
 - **Traditions · זרמים:** a diagram of the branches of Judaism with the calendar and festival-day custom of each, and buttons that switch to it. The fixed calendar adds a one-day-everywhere (Reform) scheme and Sigd, the Beta Israel festival.
 - **Torah reading · קריאת התורה:** on the Today page, the full Shabbat reading in Hebrew and English. Each calendar uses its own tradition: the rabbinic annual cycle, the ancient triennial cycle, the Karaite portions, or the Samaritan portions read from the Samaritan Pentateuch.
+- **Hillula days · ימי הילולא:** 36 anniversaries of great tzaddikim, from Moses and Rabbi Shimon bar Yochai to the Baba Sali. Each is a clickable chip with a short history and sources, shown in the fixed, observed and Early Temple calendars.
 - **Finds your location** automatically (asks the browser once) and gives **a short history of every holiday** when you click its name.
 - **Pages:** Today, Month, Year & holidays (with .ics and .csv downloads), Compare, Cycles, How it works.
 - **Design:** proper nouns also appear in Hebrew letters, and the look follows First Temple period art.

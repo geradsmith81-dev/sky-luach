@@ -97,6 +97,17 @@ On the Today page, choose **Torah reading · קריאת התורה** at the top.
 - **Karaite:** the Karaite portions and haftarot as published by the Karaite Jews of America, on the Karaite calendar. The cycle starts after 22 Tishrei, Naso is read on the Sabbath before the Sunday Shavuot, and the mourning portions fall between 9 Tammuz and 10 Av. How portions are joined in a given year is the app's model, because no dated Karaite schedule was found.
 - **Samaritan:** the Samaritan community's 54 Sabbath portions, read from the Samaritan Pentateuch. The text is MS Nablus 6 (1204 CE) in the edition and English translation of Moshe Florentin and Abraham Tal (2024). The Hebrew is unpointed, as in the manuscript, and it contains the Samaritan readings, such as the commandment about Mount Gerizim after the Ten Commandments. The schedule matches 83 of 84 dated Sabbaths in the community's 2004–2006 calendars. There is no haftarah: the Samaritan scriptures are the Torah alone.
 
+### 4d. Hillula days · ימי הילולא
+
+A *hillula* is the anniversary of the passing of a great *tzaddik*. The word comes from the Zohar, which calls the death of Rabbi Shimon bar Yochai a wedding feast. Visits to the grave, candles, study and festive meals on these days are strong customs among Sephardi and Mizrahi Jews, above all Moroccan Jews, and among Chasidim. Other communities mark some of them in study and prayer.
+
+The app shows 36 hillula days, from Miriam, Moses and King David to the Baba Sali and Rabbi Ovadia Yosef. Click one for a short history with sources; the same histories are listed at the end of this page. The rules:
+
+- Each day falls on its Hebrew date and is never moved for Shabbat.
+- A figure who died in a known year is shown only from the following year.
+- In a leap year, an Adar date is shown in Adar I, the Ashkenazi custom; Sephardim keep it in Adar II.
+- They appear in the fixed, observed and Early Temple Period calendars, and you can hide them in Settings. Karaites and Samaritans do not keep hillulot.
+
 ### 5. The look of the app · עיצוב
 
 The design draws on the art of the First Temple period (Iron Age II, about 1000–586 BCE) in Israel and Judah:

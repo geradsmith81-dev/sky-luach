@@ -36,12 +36,12 @@ BRONZE = "#b8834a"
 CHIP = {
     "major": "#e9c46a", "fast": "#cfc6b4", "chol": "#efe3c8", "minor": "#bcd39a",
     "rosh_chodesh": "#b3cdee", "modern": "#a8dbd6", "special_shabbat": "#ddbfd6",
-    "erev": "#e0d6c4", "omer": "#e3d38f",
+    "erev": "#e0d6c4", "omer": "#e3d38f", "hillula": "#f2c6a4",
 }
 KIND_LABEL = {
     "major": "Festival (no work)", "fast": "Fast", "chol": "Chol HaMoed", "minor": "Minor holiday",
     "rosh_chodesh": "Rosh Chodesh", "modern": "Israeli national day", "special_shabbat": "Special Shabbat",
-    "erev": "Eve", "omer": "Omer count",
+    "erev": "Eve", "omer": "Omer count", "hillula": "Hillula (a tzaddik's yahrzeit)",
 }
 
 

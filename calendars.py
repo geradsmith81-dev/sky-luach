@@ -10,6 +10,7 @@ import observed_calendar as oc
 import pretemple_calendar as ptc
 import karaite_calendar as kc
 import samaritan_calendar as sc
+import hillulot as hl
 from fixed_calendar import HDate, Holiday
 
 FIXED = "Fixed (rabbinic)"
@@ -49,14 +50,26 @@ class MonthInfo:
         return f"{self.name} {self.year}"
 
 
+def _merge(H: list[Holiday], extra: list[Holiday]) -> list[Holiday]:
+    if not extra:
+        return H
+    return sorted(H + extra, key=lambda h: (h.date, fc._KIND_ORDER.get(h.kind, 9)))
+
+
 class FixedView:
     kind = FIXED
     short = "Fixed"
 
-    def __init__(self, israel: bool, modern: bool, omer: bool, scheme: str | None = None, sigd: bool = False):
+    def __init__(self, israel: bool, modern: bool, omer: bool, scheme: str | None = None, sigd: bool = False,
+                 hillula: bool = True):
         self.scheme = scheme or ("israel" if israel else "diaspora")
         self.israel = self.scheme != "diaspora"
-        self.modern, self.omer, self.sigd = modern, omer, sigd
+        self.modern, self.omer, self.sigd, self.hillula = modern, omer, sigd, hillula
+
+    def _hillulot(self, year: int) -> list[Holiday]:
+        if not self.hillula:
+            return []
+        return hl.for_year(year, fc.to_gregorian, fc.is_leap, lambda y, m, d: HDate(y, m, d))
 
     def _kw(self) -> dict:
         return dict(israel=self.israel, modern=self.modern, omer=self.omer, sigd=self.sigd,
@@ -92,10 +105,14 @@ class FixedView:
         return fc.from_gregorian(d).year
 
     def holidays_for_year(self, year: int, rosh_chodesh=True, special=True) -> list[Holiday]:
-        return fc.holidays_for_year(year, special_shabbatot=special, rosh_chodesh=rosh_chodesh, **self._kw())
+        H = fc.holidays_for_year(year, special_shabbatot=special, rosh_chodesh=rosh_chodesh, **self._kw())
+        return _merge(H, self._hillulot(year))
 
     def holidays_between(self, start: date, end: date, rosh_chodesh=True, special=True) -> list[Holiday]:
-        return fc.holidays_between(start, end, special_shabbatot=special, rosh_chodesh=rosh_chodesh, **self._kw())
+        H = fc.holidays_between(start, end, special_shabbatot=special, rosh_chodesh=rosh_chodesh, **self._kw())
+        extra = [h for y in range(fc.from_gregorian(start).year, fc.from_gregorian(end).year + 1)
+                 for h in self._hillulot(y) if start <= h.date <= end]
+        return _merge(H, extra)
 
     def parsha(self, d: date) -> tuple[str, str] | None:
         """(English, Hebrew) names of the weekly portion; None if not Shabbat; ('', '') on a festival."""
@@ -112,10 +129,17 @@ class ObservedView:
     kind = OBSERVED
     short = "Observed"
 
-    def __init__(self, criterion: str, equinox: str, nisan_day: int, omer: bool):
+    def __init__(self, criterion: str, equinox: str, nisan_day: int, omer: bool, hillula: bool = True):
         self.cal = oc.ObservedCalendar(criterion, equinox, nisan_day)
         self.omer = omer
         self.israel = True
+        self.hillula = hillula
+
+    def _hillulot(self, year: int) -> list[Holiday]:
+        if not getattr(self, "hillula", False) or self.kind == KARAITE:
+            return []
+        cal = self.cal
+        return hl.for_year(year, cal.to_gregorian, cal.is_leap, lambda y, m, d: HDate(y, m, d, cal.is_leap(y)))
 
     def covers(self, d: date) -> bool:
         return self.cal.covers(d)
@@ -162,10 +186,15 @@ class ObservedView:
         return h.year if h else None
 
     def holidays_for_year(self, year: int, rosh_chodesh=True, special=True) -> list[Holiday]:
-        return self.cal.holidays_for_year(year, rosh_chodesh=rosh_chodesh, omer=self.omer)
+        H = self.cal.holidays_for_year(year, rosh_chodesh=rosh_chodesh, omer=self.omer)
+        return _merge(H, self._hillulot(year) if self.cal.year_complete(year) else [])
 
     def holidays_between(self, start: date, end: date, rosh_chodesh=True, special=True) -> list[Holiday]:
-        return self.cal.holidays_between(start, end, rosh_chodesh=rosh_chodesh, omer=self.omer)
+        H = self.cal.holidays_between(start, end, rosh_chodesh=rosh_chodesh, omer=self.omer)
+        ys = {h.year for h in (self.cal.from_gregorian(start), self.cal.from_gregorian(end)) if h}
+        ys = range(min(ys), max(ys) + 1) if ys else []
+        extra = [h for y in ys if self.cal.year_complete(y) for h in self._hillulot(y) if start <= h.date <= end]
+        return _merge(H, extra)
 
     def parsha(self, d: date):
         return None   # the annual reading cycle belongs to the fixed calendar
@@ -178,10 +207,11 @@ class PreTempleView(ObservedView):
     kind = PRETEMPLE
     short = "Early Temple"
 
-    def __init__(self, rule: str, equinox: str, nisan_day: int, omer: bool):
+    def __init__(self, rule: str, equinox: str, nisan_day: int, omer: bool, hillula: bool = True):
         self.cal = ptc.PreTempleCalendar(rule, equinox, nisan_day)
         self.omer = omer
         self.israel = True
+        self.hillula = hillula
 
     def _info(self, m):
         info = super()._info(m)

@@ -285,6 +285,16 @@ _RULES = [
 ]
 
 
+# hillula days: one history per tzaddik (hillulot.py), matched before the general rules
+try:
+    import hillulot as _hl
+    _hH, _hR = _hl.history_entries()
+    H.update(_hH)
+    _RULES[:0] = _hR
+except Exception:      # the calendar still works without the hillula module
+    pass
+
+
 def key_for(name: str) -> str | None:
     """The history entry for a holiday name as the calendars produce it."""
     for prefix, key in _RULES:

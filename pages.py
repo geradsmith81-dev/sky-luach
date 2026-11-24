@@ -832,7 +832,20 @@ def render_about(ctx):
     st.markdown("### Holiday guide · מדריך המועדים")
     st.caption("The same short histories open when you click a holiday's name anywhere in the app.")
     for key, (title, he, text, src) in hh.H.items():
+        if key.startswith("hillula_"):
+            continue
         with st.expander(f"{title} · {he}"):
+            st.markdown(text)
+            st.caption(f"Sources: {src}")
+    st.markdown("### Hillula days · ימי הילולא")
+    st.caption("Anniversaries of the passing of great tzaddikim, in calendar order from Tishrei. They are kept from "
+               "sunset to sunset and are never moved for Shabbat.")
+    import hillulot as hl
+    order = [7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6]
+    for t in sorted(hl.T, key=lambda t: (order.index(t.month), t.day)):
+        title, he, text, src = hh.H[f"hillula_{t.key}"]
+        mname = "Adar II (Adar in an ordinary year)" if t.month == fc.ADAR_II else fc.MONTH_NAMES[t.month]
+        with st.expander(f"{t.day} {mname} — {title} · {he}"):
             st.markdown(text)
             st.caption(f"Sources: {src}")
     try:

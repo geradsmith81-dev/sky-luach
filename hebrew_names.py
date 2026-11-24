@@ -42,7 +42,7 @@ TERMS = {
 }
 KIND_HE = {
     "major": "יום טוב", "fast": "תענית", "chol": "חול המועד", "minor": "מועד", "rosh_chodesh": "ראש חודש",
-    "modern": "יום לאומי", "special_shabbat": "שבת מיוחדת", "erev": "ערב חג", "omer": "ספירת העומר",
+    "modern": "יום לאומי", "special_shabbat": "שבת מיוחדת", "erev": "ערב חג", "omer": "ספירת העומר", "hillula": "הילולא",
 }
 SEASON_HE = {"Vernal equinox": "שוויון האביב", "Summer solstice": "היום הארוך",
              "Autumnal equinox": "שוויון הסתיו", "Winter solstice": "הלילה הארוך"}

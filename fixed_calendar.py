@@ -445,7 +445,7 @@ def holidays_for_year(year: int, israel: bool = False, modern: bool = True,
 
 
 _KIND_ORDER = {"major": 0, "fast": 1, "chol": 2, "minor": 3, "modern": 4, "rosh_chodesh": 5,
-               "special_shabbat": 6, "erev": 7, "omer": 8}
+               "special_shabbat": 6, "erev": 7, "omer": 8, "hillula": 4}
 
 
 def modern_days(year: int) -> list[Holiday]:
